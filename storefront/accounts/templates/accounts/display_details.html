@@ -1,0 +1,33 @@
+{% extends 'site_base.html' %}
+{% load static %}
+
+{% block content_block %}
+
+{% if user.is_authenticated %}
+
+{% block notification %}{% endblock %}
+<div class="container-fluid">
+
+  <h3>{{account.user.username}}'s Account Page!</h3>
+
+  <h4>Your details: </h4>
+
+  <div class="account-details">
+    <h5>First name: {{account.first_name}}</h5>
+    <h5>Surname: {{account.surname}}</h5>
+    <h5>Billing address: {{account.billing_address}}</h5>
+    <h5>Delivery address: {{account.delivery_address}}</
+  </div>
+  <div class="edit-details">
+  <a href="{% url 'accounts:edit' pk=user.customer_account.pk %}"
+    title="Edit" class="btn btn-outline-warning">Edit Details</a>
+</div>
+
+  <h3> Order list for account will be injected here </h3>
+
+{% else %}
+
+<h3>Page error</h3>
+{% endif %}
+
+{% endblock %}

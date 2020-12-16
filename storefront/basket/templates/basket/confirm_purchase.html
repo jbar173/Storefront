@@ -1,0 +1,21 @@
+{% extends 'basket_main.html' %}
+
+{% block purchase %}
+  <h3>Confirm purchase:</h3>
+
+  <!-- if user is authenticated but no account: -->
+    <h4>Please fill in a few details for us!:</h4>
+    <!-- button to account:create then redirect here??????
+    <!-- button to go back to basket-->
+
+  <!-- else if user is authenticated and has an account -->
+    <h3>Is this still your shipping address?:</h3>
+    <!-- {% include _display_details.html %} -->
+    <!-- button to confirm and create new instance of Order -->
+    <!-- button to edit details account:edit then redirect here???? -->
+    <!-- button to go back to basket-->
+
+  <!-- else if not authenticated -->
+    <h3>Please create an account with us in order to make a purchase!:</h3>
+    <!-- signup button redirect to accounts:signup -->
+{% endblock %}
