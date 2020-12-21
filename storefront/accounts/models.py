@@ -1,11 +1,7 @@
 from django.db import models
-from django.utils.text import slugify
 from django.urls import reverse
 from django.conf import settings
 from django.contrib import auth
-from django.http import HttpResponse
-from django.http import Http404
-
 from django import template
 register = template.Library()
 

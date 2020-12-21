@@ -1,0 +1,11 @@
+{% extends 'site_base.html' %}
+
+{% block content_block %}
+
+<h4>Design your bouquet theme by flower, colour, or both:</h4>
+<h4> <a href="{% url 'products:theme' %}">Tailor bouquet</a> </h4>
+
+<h4>Individually tailor each flower!:</h4>
+<h4> <a href="{% url 'products:create_single' %}">Tailor Flower</a> </h4>
+
+{% endblock %}

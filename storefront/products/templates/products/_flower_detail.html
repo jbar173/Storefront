@@ -1,0 +1,11 @@
+{% extends 'site_base.html' %}
+
+{% block content_block %}
+
+  <h3>New flower:</h3>
+  <h4>{{flower}}</h4>
+<!-- Add flower to bouquet? Button which adds then takes to -->
+
+  <h4> <a href="{% url 'products:create_single' %}">Add flower</a> </h4>
+
+{% endblock %}

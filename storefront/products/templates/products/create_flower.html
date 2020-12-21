@@ -1,0 +1,14 @@
+{% extends 'site_base.html' %}
+{% load bootstrap3 %}
+
+{% block content_block %}
+
+<h3>Design your flower:</h3>
+
+<form class="create_flower" action="{% url 'products:create_single' %}" method="post">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <input type="submit" class="btn btn-outline-success" value="Create">
+</form>
+
+{% endblock %}

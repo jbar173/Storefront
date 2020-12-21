@@ -21,6 +21,7 @@ from basket import urls
 from . import views
 
 urlpatterns = [
+
     url(r'^$',views.HomePage.as_view(),name='home'),
     path('admin/', admin.site.urls),
     url(r'^accounts/',include('accounts.urls',namespace='accounts')),
@@ -29,6 +30,6 @@ urlpatterns = [
     url(r'^thanks/$',views.ThanksPage.as_view(),name='thanks'),
     url(r'^about/$',views.AboutPage.as_view(),name='about'),
     url(r'^basket/',include('basket.urls',namespace='basket')),
-    # url(r'^products/',include('products.urls',namespace='products')),
+    url(r'^products/',include('products.urls',namespace='products')),
 
 ]

@@ -1,0 +1,22 @@
+{% extends 'site_base.html' %}
+
+{% block content_block %}
+
+  <h3>Welcome to the shop!</h3>
+
+ <h5>Pics here</h5>
+ <p></p>
+ <h4>Browse our range:</h4>
+ <h4> <a href="{% url 'products:range' %}">Browse our range</a> </h4>
+ <p>
+  <h4>Design your own bouquet here:</h4>
+  <h4> <a href="{% url 'products:tailor' %}">Design bouquet</a> </h4>
+  <p></p>
+  <h4>Or...</h4>
+  <p></p>
+  <h4>Surprise me!:</h4>
+  <h5>We'll design a random bouquet for you!</h5>
+  <!-- Button -->
+
+
+{% endblock %}

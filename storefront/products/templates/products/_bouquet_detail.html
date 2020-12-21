@@ -1,0 +1,15 @@
+{% extends 'site_base.html' %}
+
+{% block content_block %}
+
+  <h3>In your bouquet:</h3>
+  <!-- for flower in bouquet -->
+  {% include "products/_flower_detail.html" %}
+
+  <h5>Total: £{{bouquet.price}}</h5>
+  <!-- Add another flower:
+    <h4> <a href="{% url 'products:create_single' %}">Add flower</a> </h4>-->
+
+  <!-- Save bouquet and add to basket -->
+  <h6> <a href="{% url 'basket:main' %}">View basket</a> </h6>
+{% endblock %}

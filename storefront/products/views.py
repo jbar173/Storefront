@@ -1,12 +1,43 @@
 from django.shortcuts import render
+from django.views.generic import (CreateView, DetailView,
+                                TemplateView,)
+from . import models
+from . import forms
 
 # Create your views here.
 
 
+class FlowerCreate(CreateView):
+    model = models.Flower
+    form_class = forms.CreateFlowerForm
+    template_name = 'products/create_flower.html'
+
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.price = self.object.type.price + self.object.colour.price
+        self.object.save()
+        return super().form_valid(form)
 
 
+class FlowerDetail(DetailView):
+    model = models.Flower
+    template_name = 'products/_flower_detail.html'
 
 
+class ShopMain(TemplateView):
+    template_name = 'products/shop_main.html'
+
+class RangeHome(TemplateView):
+    template_name = 'products/range_home.html'
+
+class TailorHome(TemplateView):
+    template_name = 'products/tailor_home.html'
+
+class TailorByTheme(TemplateView):
+    template_name = 'products/tailor_theme.html'
+
+class TailorByFlower(TemplateView):
+    template_name = 'products/tailor_flower.html'
 
 
 
