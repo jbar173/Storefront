@@ -1,0 +1,14 @@
+{% extends 'site_base.html' %}
+{% load bootstrap3 %}
+
+{% block content_block %}
+
+<form method="post">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <input type="submit" class="btn btn-outline-success" value="Save bouquet and continue shopping">
+</form>
+
+<h6><a href="{% url 'products:detail_bouquet' pk=bouquet.pk %}">Back to bouquet</a></h6>
+
+{% endblock %}

@@ -4,13 +4,18 @@ from . import views
 app_name = 'products'
 
 urlpatterns = [
-    url(r'^create/single/$',views.FlowerCreate.as_view(),name="create_single"),
-    url(r'^single/detail/(?P<pk>\d+)/$',views.FlowerDetail.as_view(),name="detail_single"),
     url(r'^main/$',views.ShopMain.as_view(),name="shop"),
-    url(r'^tailor/$',views.TailorHome.as_view(),name='tailor'),
     url(r'^range/$',views.RangeHome.as_view(),name='range'),
+    url(r'^base/$',views.ProductsBase.as_view(),name='base'),
+
+    url(r'^tailor/$',views.create_bouquet,name='tailor'),
+    url(r'^(?P<bouquet_id>\d+)/create/single/$',views.FlowerCreate.as_view(),name="create_single"),
+    url(r'^bouquet/(?P<pk>\d+)/$',views.BouquetDetail.as_view(),name="detail_bouquet"),
+    url(r'^bouquet/(?P<pk>\d+)/update/$',views.UpdateBouquet.as_view(),name="update_bouquet"),
+    url(r'^bouquet/(?P<pk>\d+)/delete/$',views.DeleteBouquet.as_view(),name="delete_bouquet"),
+
     url(r'^theme/$',views.TailorByTheme.as_view(),name='theme'),
-    url(r'^flower/$',views.TailorByFlower.as_view(),name='flower'),
+
 ]
 
 

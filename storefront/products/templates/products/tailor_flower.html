@@ -2,9 +2,23 @@
 
 {% block content_block %}
 
-{% include '_flower_detail.html' %}
+<h3>In your bouquet:</h3>
+{% if bouquet.flower.count < 1 %}
+  <h5>No flowers in your bouquet yet!</h5>
+  <h5>Total: £{{bouquet.price}}</h5>
+{% else %}
+  {% for flower in bouquet.flower.all %}
+    <h6>{{flower}}</h5>
+    <p>£{{flower.price}}</p>
+  {% endfor %}
+  <h5>Total: £{{total}}</h5>
+{% endif %}
 
-<h4>Your bouquet so far:</h4>
-<!-- include _bouquet_detail.html -->
+
+<h6> <a href="{% url 'products:create_single' bouquet_id=bouquet.pk %}">Create a flower</a> </h6>
+
+<h6> <a href="{% url 'products:update_bouquet' pk=bouquet.pk %}">Save bouquet to basket</a> </h6>
+
+<h6> <a href="{% url 'products:delete_bouquet' pk=bouquet.pk %}">Discard bouquet</a></h6>
 
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'site_base.html' %}
+
+{% block content_block %}
+
+<h5>Are you sure you want to delete your bouquet?</h5>
+
+<form method="POST">
+  {% csrf_token %}
+  <input type="submit" class="btn btn-outline-success" value="Delete">
+</form>
+
+<h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouquet.pk %}">Cancel</a></h6>
+
+
+{% endblock %}

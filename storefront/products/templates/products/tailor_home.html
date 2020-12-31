@@ -6,6 +6,11 @@
 <h4> <a href="{% url 'products:theme' %}">Tailor bouquet</a> </h4>
 
 <h4>Individually tailor each flower!:</h4>
-<h4> <a href="{% url 'products:create_single' %}">Tailor Flower</a> </h4>
+
+<form class="create-bouquet" method="post">
+  {{bouquet_form.as_p}}
+  {% csrf_token %}
+  <input type="submit" class="btn btn-outline-success" value="Tailor flower by flower">
+</form>
 
 {% endblock %}
