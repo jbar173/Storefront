@@ -2,11 +2,12 @@
 
 {% block content_block %}
 
-<h3>In your bouquet:</h3>
 {% if bouquet.flower.count < 1 %}
   <h5>No flowers in your bouquet yet!</h5>
+  <p>...</p>
   <h5>Total: £{{bouquet.price}}</h5>
 {% else %}
+<h3>In your bouquet:</h3>
   {% for flower in bouquet.flower.all %}
     <h6>{{flower}}</h5>
     <p>£{{flower.price}}</p>
@@ -15,10 +16,14 @@
 {% endif %}
 
 
-<h6> <a href="{% url 'products:create_single' bouquet_id=bouquet.pk %}">Create a flower</a> </h6>
+<h6> <a class="btn btn-outline-warning" href="{% url 'products:create_single' bouquet_id=bouquet.pk %}">Add a flower</a></h6>
 
-<h6> <a href="{% url 'products:update_bouquet' pk=bouquet.pk %}">Save bouquet to basket</a> </h6>
+{% if user.customer_basket %}
+<h6><a class="btn btn-outline-success" href="{% url 'products:update_bouquet_two' pk=bouquet.pk %}">Save bouquet to basket</a></h6>
+{% else %}
+<h6><a class="btn btn-outline-success" href="{% url 'products:update_bouquet' pk=bouquet.pk %}">Save bouquet to basket</a></h6>
+{% endif %}
 
-<h6> <a href="{% url 'products:delete_bouquet' pk=bouquet.pk %}">Discard bouquet</a></h6>
+<h6><a class="btn btn-outline-danger" href="{% url 'products:delete_bouquet' pk=bouquet.pk %}">Discard bouquet</a></h6>
 
 {% endblock %}

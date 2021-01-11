@@ -1,0 +1,25 @@
+{% extends 'site_base.html' %}
+{% load bootstrap3 %}
+
+{% block content_block %}
+
+{% if user.is_authenticated %}
+
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" class="btn btn-outline-success" value="Add to my basket">
+  </form>
+
+  <h6><a href="{% url 'products:detail_bouquet' pk=bouq %}">Back to bouquet</a></h6>
+
+{% else %}
+
+  <h5>Please sign up to save a bouquet!</h5>
+  <a href="{% url 'accounts:signup' %}">Sign up</a>
+
+  <h6><a href="{% url 'products:detail_bouquet' pk=bouq %}">Back to bouquet</a></h6>
+
+{% endif %}
+
+{% endblock %}

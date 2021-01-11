@@ -1,0 +1,85 @@
+{% extends 'site_base.html' %}
+{% load static %}
+
+{% block content_block %}
+<link rel="stylesheet" href="{% static "/css/css_master.css" %}">
+
+<h5>Your bouquet:</h5>
+<p>.</p>
+
+<div class="container-fluid" id="tb_detail">
+    <h6>{{object}}</h6>
+    <h6>Theme: By {{object.theme_name}}</h6>
+    <h6>Size: {{object.size}}</h6>
+    <h6>Price: £{{object.price}}</h6>
+</div>
+
+<p>.</p>
+
+{% if object.theme_name == 'Type' %}
+  <h6>Your flower types:</h6>
+  <h6>.</h6>
+  {% if object.theme.count > 0 %}
+    {% for x in object.theme.all %}
+      {{x.type}}
+      <h6>.</h6>
+      {% endfor %}
+  {% else %}
+    <p>No types yet</p>
+  {% endif %}
+{% else %}
+  <p></p>
+  {% endif %}
+
+{% if object.theme_name == 'Colour' %}
+  <h6>Your bouquet colours:</h6>
+    {% if object.theme.count > 0 %}
+      {% for x in object.theme.all %}
+        {{x.colour}}
+        <h6>.</h6>
+        {% endfor %}
+    {% else %}
+      <p>No colours yet</p>
+      {% endif %}
+{% else %}
+  <p></p>
+  {% endif %}
+
+
+{% if object.theme_name == 'Type and Colour' %}
+
+  <h6>Your bouquet colours:</h6>
+  <h6>.</h6>
+    {% for x in object.theme.all %}
+      {% if x.colour %}
+        {{x.colour}}
+        <h6>.</h6>
+        {% endif %}
+      {% endfor %}
+
+
+  <h6>Your flower types:</h6>
+  <h6>.</h6>
+      {% for x in object.theme.all %}
+        {% if x.type %}
+          {{x.type}}
+        <h6>.</h6>
+        {% endif %}
+      {% endfor %}
+    <h6>.</h6>
+
+
+{% endif %}
+
+
+{% if object.theme_name == 'Type' %}
+<h5><a class="btn btn-outline-success" href="{% url 'themed_products:update_type' %}">Add a flower type to your bouquet</a></h5>
+{% elif object.theme_name == 'Colour' %}
+<h5><a class="btn btn-outline-success" href="{% url 'themed_products:update_colour' %}">Add a colour to your bouquet</a></h5>
+
+{% else %}
+<h5><a class="btn btn-outline-success" href="{% url 'themed_products:update_type' %}">Add a flower type to your bouquet</a></h5>
+<h5><a class="btn btn-outline-success" href="{% url 'themed_products:update_colour' %}">Add a colour to your bouquet</a></h5>
+{% endif %}
+
+{% endblock %}

@@ -2,14 +2,15 @@
 
 {% block content_block %}
 
-<h4>Design your bouquet theme by flower, colour, or both:</h4>
-<h4> <a href="{% url 'products:theme' %}">Tailor bouquet</a> </h4>
+<h4>Design your bouquet theme by flower, colour, or both!</h4>
+<h5> <a class="btn btn-outline-success" href="{% url 'themed_products:create_themed' %}">Create a bouquet theme</a> </h5>
 
-<h4>Individually tailor each flower!:</h4>
+<p>...</p>
 
 <form class="create-bouquet" method="post">
   {{bouquet_form.as_p}}
   {% csrf_token %}
+  <h4>Or tailor your bouquet flower by flower!</h4>
   <input type="submit" class="btn btn-outline-success" value="Tailor flower by flower">
 </form>
 

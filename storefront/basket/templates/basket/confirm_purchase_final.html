@@ -1,0 +1,17 @@
+{% extends 'site_base.html' %}
+
+{% block content_block %}
+
+  <h3>Confirm purchase:</h3>
+
+
+    <h5>Are these still your billing/delivery addresses?:</h5>
+      <h5>{{user.customer_account.first_name}}</h5>
+      <h5>{{user.customer_account.surname}}</h5>
+      <h5>{{user.customer_account.billing_address}}</h5>
+      <h5>{{user.customer_account.delivery_address}}</h5>
+
+    <h4>(Confirm button)</h4>
+    <h4>(Edit details and return to basket button)</h4>
+
+{% endblock %}

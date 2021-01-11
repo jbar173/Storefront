@@ -1,0 +1,18 @@
+{% extends 'site_base.html' %}
+{% load bootstrap3 %}
+
+
+{% block content_block %}
+
+
+<h5>Add colours/types:</h5>
+
+<form method="post">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <input type="submit" class="btn btn-outline-warning" value="Add to bouquet">
+</form>
+
+{% endblock %}
+
+<h6><a class='btn btn-outline warning' href="{% url 'themed_products:themed_detail' pk=self.t_bouquet.pk %}">Save and go back</a></h6>

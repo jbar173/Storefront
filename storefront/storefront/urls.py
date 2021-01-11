@@ -31,5 +31,6 @@ urlpatterns = [
     url(r'^about/$',views.AboutPage.as_view(),name='about'),
     url(r'^basket/',include('basket.urls',namespace='basket')),
     url(r'^products/',include('products.urls',namespace='products')),
+    url(r'^themed_products/',include('themed_products.urls',namespace='themed_products')),
 
 ]

@@ -1,0 +1,27 @@
+{% if user.is_authenticated %}
+
+  {% if b %}
+    <h3>{{user.customer_basket}}</h3>
+    <p>~~~~~~~~~</p>
+      <h5>Items: {{b|length}}</h5>
+      <p>...</p>
+      {% for x in b %}
+        <h6>{{x}}</h6>
+        <p>£{{x.price}}</p>
+      {% endfor %}
+      <p>...</p>
+        {% if user.customer_account  %}
+          <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase_final' %}">Go to check out</a> *confirm address and create order*</h6>
+        {% else %}
+          <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase' %}">Go to check out</a> *create account and create order*</h6>
+          {% endif %}
+
+    {% else %}
+      <h5>Your basket is empty! 1</h5>
+    {% endif %}
+
+
+{% else %}
+  <h5>Create account and go to checkout button</h5>
+
+{% endif %}

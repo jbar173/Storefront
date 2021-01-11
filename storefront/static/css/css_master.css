@@ -1,3 +1,4 @@
+
 .mybrand{
   font-family: 'Marck Script', cursive;
   font-size: 1.75em;
@@ -9,9 +10,6 @@
   color:black;
 }
 
-.create_flower{
-
+#tb_detail{
+  border: 5px dotted pink;
 }
-
-
-  /* font-family: 'Marck Script', cursive; */

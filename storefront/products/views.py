@@ -4,12 +4,13 @@ from django.views.generic import (CreateView, DetailView,
                                 DeleteView,)
 from . import models
 from . import forms
-from django.urls import reverse, reverse_lazy
+from .models import Type
+from django.urls import reverse_lazy
 from django.shortcuts import redirect
 import re
 
-# Create your views here.
 
+# Create your views here.
 
 class FlowerCreate(CreateView):
     model = models.Flower
@@ -25,7 +26,6 @@ class FlowerCreate(CreateView):
         self.object.bouquet = models.Bouquet.objects.get(id__iexact=b3)
         self.object.save()
         return super().form_valid(form)
-
 
 
 def create_bouquet(request):
@@ -57,11 +57,12 @@ class BouquetDetail(DetailView):
         return context
 
 
+### Update (condition: user doesn't have basket):
 class UpdateBouquet(UpdateView):
     model = models.Bouquet
     form_class = forms.UpdateBouquetForm
     template_name = 'products/update_bouquet.html'
-    success_url = reverse_lazy('products:shop')
+    success_url = reverse_lazy('basket:create_basket')
 
     def form_valid(self,form):
         self.object = form.save(commit=False)
@@ -73,49 +74,55 @@ class UpdateBouquet(UpdateView):
         return super().form_valid(form)
 
 
+### Update (condition: user already has basket):
+class UpdateBouquetTwo(UpdateView):
+    model = models.Bouquet
+    form_class = forms.UpdateBouquetForm
+    template_name = 'products/update_bouquet.html'
+    success_url = reverse_lazy('basket:basket')
+
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        result = 0
+        for flower in self.object.flower.all():
+            result += flower.price
+        self.object.price = result
+        self.object.basket = self.request.user.customer_basket
+        self.object.save()
+        return super().form_valid(form)
+
+
+# class UpdateBouquetThree(UpdateView):
+#     model = models.Bouquet
+#     form_class = forms.UpdateBouquetForm
+#     template_name = 'products/update_bouquet.html'
+#     success_url = reverse_lazy('basket:basket')
+#
+#     def form_valid(self,form):
+#         self.object = form.save(commit=False)
+#         result = 0
+#         for flower in self.object.flower.all():
+#             result += flower.price
+#         self.object.price = result
+#         self.object.basket = self.request.user.customer_basket
+#         self.object.save()
+#         return super().form_valid(form)
+
+
 class DeleteBouquet(DeleteView):
     model = models.Bouquet
     template_name = 'products/delete_bouquet.html'
     success_url = reverse_lazy('products:shop')
 
+########
+
 
 class ShopMain(TemplateView):
     template_name = 'products/shop_main.html'
 
+
 class RangeHome(TemplateView):
     template_name = 'products/range_home.html'
 
-class ProductsBase(TemplateView):
-    template_name = 'products/product_base.html'
 
-# class TailorHome(TemplateView):
-#     template_name = 'products/tailor_home.html'
-
-class TailorByTheme(TemplateView):
-    template_name = 'products/tailor_theme.html'
-
-
-
-
-
-######### Views for Order model in basket:
-
-# class OrderList(LoginRequiredMixin,SelectRelatedMixin,ListView):
-#     model = models.Order
-#     select_related = ['account','order']
-
-    # def get_queryset(self):
-        # try:
-        #     queryset = super().get_queryset(model=Account?) ???
-        #     return queryset.filter(customer_id__exact=self.kwargs.get('username'))
-        ### ^ Get an account with this specific customer variable
-
-        # except DoesNotExist:
-                ## redirect to CreateAccount view.
-        #### ^ if an account with this specific customer variable doesn't exist
-
-# class OrderList(TemplateView):
-#     template_name = 'accounts/_order_list.html'
-#
-# class EditSuccess(TemplateView):
-#     template_name = 'edit_success.html'
+########
