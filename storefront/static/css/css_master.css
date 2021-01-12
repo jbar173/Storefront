@@ -10,6 +10,26 @@
   color:black;
 }
 
-#tb_detail{
-  border: 5px dotted pink;
+#td_detail{
+  border: 2px dotted pink;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.tb_title{
+  border: 2px solid pink;
+  border-radius: 6px;
+  padding: 8px 8px 8px 8px;
+  display: inline;
+}
+
+.tb_title_big{
+  border: 2px solid pink;
+  border-radius: 12px;
+  padding: 30px 20px 38px 20px;
+  display: inline;
+}
+
+.invis{
+  color: white;
 }

@@ -2,10 +2,14 @@
 {% load bootstrap3 %}
 
 {% block content_block %}
-  <h3>Log in here!</h3>
+<h6 class="invis">.</h6>
+  <h3 class="tb_title">Log in here!</h3>
+    <h6 class="invis">.</h6>
+    <h6 class="invis">.</h6>
   <form class="login-form" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <input type="submit" value="Log In">
+      <h6 class="invis">.</h6>
+    <input class="btn btn-outline-success" type="submit" value="Log In">
   </form>
 {% endblock %}

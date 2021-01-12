@@ -92,27 +92,11 @@ class UpdateBouquetTwo(UpdateView):
         return super().form_valid(form)
 
 
-# class UpdateBouquetThree(UpdateView):
-#     model = models.Bouquet
-#     form_class = forms.UpdateBouquetForm
-#     template_name = 'products/update_bouquet.html'
-#     success_url = reverse_lazy('basket:basket')
-#
-#     def form_valid(self,form):
-#         self.object = form.save(commit=False)
-#         result = 0
-#         for flower in self.object.flower.all():
-#             result += flower.price
-#         self.object.price = result
-#         self.object.basket = self.request.user.customer_basket
-#         self.object.save()
-#         return super().form_valid(form)
-
-
 class DeleteBouquet(DeleteView):
     model = models.Bouquet
     template_name = 'products/delete_bouquet.html'
     success_url = reverse_lazy('products:shop')
+
 
 ########
 

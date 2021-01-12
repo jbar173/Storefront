@@ -14,6 +14,8 @@ register = template.Library()
 # Create your models here.
 
 class Basket(models.Model):
+
+    total = models.DecimalField(decimal_places=2,max_digits=8,null=True,blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name='customer_basket',on_delete=models.CASCADE)
     b_id_num = models.PositiveIntegerField(null=True,blank=True)
 

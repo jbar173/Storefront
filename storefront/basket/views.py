@@ -1,9 +1,12 @@
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView, CreateView,
-                                  DetailView,)
+                                  DetailView, UpdateView,)
 from .models import Basket
 from . import forms
+from accounts.models import Account
 from products.models import Bouquet
+from themed_products.models import ThemedBouquet
 from django.urls import reverse_lazy
 import re
 from django.contrib.auth import get_user_model
@@ -29,6 +32,11 @@ class CreateBasket(CreateView):
         b2 = re.findall(r'/\d+',b1)[-1]
         b3 = re.findall(r'\d+',b2)[0]
         context['bouq'] = b3
+        res = False
+        pattern = ['tbouquet']
+        if re.search(pattern[0],b1):
+            res = True
+        context['tb'] = res
         return context
 
     def get_initial(self):
@@ -47,9 +55,11 @@ class CreateBasket(CreateView):
         return super().form_valid(form)
 
 
+
 class BasketDetail(DetailView):
     model = Basket
     template_name = "basket/basket_detail.html"
+
 
 
 class BasketMain(TemplateView):
@@ -57,23 +67,61 @@ class BasketMain(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(BasketMain,self).get_context_data(**kwargs)
-        b1 = self.get_queryset()
-        b2 = []                  #### all bouquets
+        b1 = self.get_queryset()[0]
+        b2 = []
         for z in b1:
             b2.append(z)
+        tb1 = self.get_queryset()[1]
+        tb2 = []
+        for z in tb1:
+            tb2.append(z)
         context['b'] = b2
+        context['tb'] = tb2
+
+        result1 = 0
+        result2 = 0
+        if len(b1) > 0:
+            for x in b1:
+                result1 += x.price
+        if len(tb2) > 0:
+            for x in tb2:
+                result2 += x.price
+        context['total'] = result1+result2
         return context
 
     def get_queryset(self):
-        return Bouquet.objects.filter(basket=self.request.user.customer_basket)
+        x = Bouquet.objects.filter(basket=self.request.user.customer_basket)
+        y = ThemedBouquet.objects.filter(basket=self.request.user.customer_basket)
+        return (x,y)
+
 
 
 class BasketTemp(TemplateView):
     template_name = "basket/basket_temp.html"
 
-#
-# class ConfirmPurchase(TemplateView):
-#     template_name = "basket/confirm_purchase.html"
+
+class CreateAccountFromBasket(LoginRequiredMixin,CreateView):
+    model = Account
+    fields = ['first_name','surname','billing_address','delivery_address']
+    template_name = 'accounts/create_account.html'
+    success_url = reverse_lazy('basket:basket')
+
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+
+class UpdateAccountFromBasket(LoginRequiredMixin,UpdateView):
+    model = Account
+    fields = ['first_name','surname','billing_address','delivery_address']
+    template_name = 'accounts/edit_details.html'
+    success_url = reverse_lazy('basket:purchase_final') ## change to Order createview url
+
+
+class FinalConfirmView(TemplateView):
+    template_name = 'basket/confirm_purchase_final.html'
 
 
 ######### Views for Order model in basket:

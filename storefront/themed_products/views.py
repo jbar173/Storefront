@@ -16,7 +16,6 @@ import re
 
 # Create your views here.
 
-
 class CreateThemedBouquet(CreateView):
     model = ThemedBouquet
     form_class = forms.CreateThemedBouquetForm
@@ -43,7 +42,7 @@ class ThemedBouquetDetail(DetailView):
 class CreateTypeTheme(CreateView):
     model = Type
     form_class = forms.CreateTypeThemeForm
-    template_name = 'themed_products/update_type_theme.html'
+    template_name = 'themed_products/update_theme.html'
 
     def get_initial(self):
         initial = super().get_initial()
@@ -52,6 +51,14 @@ class CreateTypeTheme(CreateView):
         b3 = re.findall(r'\d+',b2)[0]
         initial['b_id_num'] = b3
         return initial
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        b1 = self.request.META.get('HTTP_REFERER')
+        b2 = re.findall(r'/\d+',b1)[-1]
+        b3 = re.findall(r'\d+',b2)[0]
+        context['bouq'] = b3
+        return context
 
     def get_success_url(self,**kwargs):
         success_url = reverse_lazy('themed_products:themed_detail', kwargs={'pk':self.object.t_bouquet.pk})
@@ -68,7 +75,7 @@ class CreateTypeTheme(CreateView):
 class CreateColourTheme(CreateView):
     model = Colour
     form_class = forms.CreateColourThemeForm
-    template_name = 'themed_products/update_type_theme.html'
+    template_name = 'themed_products/update_theme.html'
 
     def get_initial(self):
         initial = super().get_initial()
@@ -78,6 +85,14 @@ class CreateColourTheme(CreateView):
         initial['b_id_num'] = b3
         return initial
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        b1 = self.request.META.get('HTTP_REFERER')
+        b2 = re.findall(r'/\d+',b1)[-1]
+        b3 = re.findall(r'\d+',b2)[0]
+        context['bouq'] = b3
+        return context
+
     def get_success_url(self,**kwargs):
         success_url = reverse_lazy('themed_products:themed_detail', kwargs={'pk':self.object.t_bouquet.pk})
         return success_url
@@ -86,5 +101,34 @@ class CreateColourTheme(CreateView):
         self.object = form.save(commit=False)
         x = form.cleaned_data['b_id_num']
         self.object.t_bouquet = ThemedBouquet.objects.get(id__iexact=x)
+        self.object.save()
+        return super().form_valid(form)
+
+
+class DeleteThemedBouquet(DeleteView):
+    model = ThemedBouquet
+    template_name = 'themed_products/delete_themed.html'
+    success_url = reverse_lazy('products:shop')
+
+
+### Update (condition: user doesn't have basket):
+class UpdateTBouquet(UpdateView):
+    model = ThemedBouquet
+    form_class = forms.UpdateTBouquetForm
+    template_name = 'themed_products/update_tbouquet.html'
+    success_url = reverse_lazy('basket:create_basket')
+
+
+
+### Update (condition: user already has basket):
+class UpdateTBouquetTwo(UpdateView):
+    model = ThemedBouquet
+    form_class = forms.UpdateTBouquetForm
+    template_name = 'themed_products/update_tbouquet.html'
+    success_url = reverse_lazy('basket:basket')
+
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.basket = self.request.user.customer_basket
         self.object.save()
         return super().form_valid(form)

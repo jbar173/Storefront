@@ -3,16 +3,22 @@
 {% block content_block %}
 
 {% if bouquet.flower.count < 1 %}
+  <h6 class="invis">.</h6>
   <h5>No flowers in your bouquet yet!</h5>
-  <p>...</p>
+  <p class="invis">.</p>
   <h5>Total: £{{bouquet.price}}</h5>
 {% else %}
-<h3>In your bouquet:</h3>
+<h6 class="invis">.</h6>
+<h3 class="tb_title">In your bouquet:</h3>
+  <h6 class="invis">.</h6>
+  <h6 class="invis">.</h6>
   {% for flower in bouquet.flower.all %}
     <h6>{{flower}}</h5>
     <p>£{{flower.price}}</p>
   {% endfor %}
+  <h6 class="invis">.</h6>
   <h5>Total: £{{total}}</h5>
+  <h6 class="invis">.</h6>
 {% endif %}
 
 

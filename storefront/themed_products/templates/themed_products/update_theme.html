@@ -13,6 +13,6 @@
   <input type="submit" class="btn btn-outline-warning" value="Add to bouquet">
 </form>
 
-{% endblock %}
+<h6><a href="{% url 'themed_products:themed_detail' pk=bouq %}">Back</a></h6>
 
-<h6><a class='btn btn-outline warning' href="{% url 'themed_products:themed_detail' pk=self.t_bouquet.pk %}">Save and go back</a></h6>
+{% endblock %}
