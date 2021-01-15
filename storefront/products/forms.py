@@ -18,23 +18,21 @@ class CreateFlowerForm(ModelForm):
         self.fields['colour'].label = 'Choose a colour:'
 
 
-
 class CreateBouquetForm(ModelForm):
 
     class Meta:
         model = models.Bouquet
-        exclude = ('basket','price',)
+        exclude = ('basket','price','order',)
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-
 
 
 class UpdateBouquetForm(ModelForm):
 
     class Meta:
         model = models.Bouquet
-        exclude = ('price','basket',)
+        exclude = ('price','basket','order',)
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)

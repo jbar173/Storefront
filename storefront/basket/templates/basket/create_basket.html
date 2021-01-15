@@ -4,24 +4,29 @@
 {% block content_block %}
 
 {% if user.is_authenticated %}
-
+  <h6 class="invis">.</h6>
   <form method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
     <input type="submit" class="btn btn-outline-success" value="Add to my basket">
+    <h6 class="invis">.</h6>
   </form>
 
-  <h6><a href="{% url 'products:detail_bouquet' pk=bouq %}">Back to bouquet</a></h6>
+  <h6><a class="btn btn-outline-warning" href="{% url 'products:detail_bouquet' pk=bouq %}">Back to bouquet</a></h6>
 
 {% else %}
 
+  <h6 class="invis">.</h6>
   <h5>Please sign up to save a bouquet!</h5>
-  <a href="{% url 'accounts:signup' %}">Sign up</a>
+    <h6 class="invis">.</h6>
+  <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">Sign up</a>
 
   {% if tb %}
-    <h6><a href="{% url 'themed_products:themed_detail' pk=bouq %}">Back to bouquet</a></h6>
+    <h6 class="invis">.</h6>
+    <h6><a class="btn btn-outline-warning" href="{% url 'themed_products:themed_detail' pk=bouq %}">Back to bouquet</a></h6>
   {% else %}
-    <h6><a href="{% url 'products:detail_bouquet' pk=bouq %}">Back to bouquet</a></h6>
+    <h6 class="invis">.</h6>
+    <h6><a class="btn btn-outline-warning" href="{% url 'products:detail_bouquet' pk=bouq %}">Back to bouquet</a></h6>
   {% endif %}
 
 {% endif %}

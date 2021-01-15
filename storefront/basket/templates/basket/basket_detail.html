@@ -1,4 +1,5 @@
 {% if user.is_authenticated %}
+
 <h6 class="invis">.</h6>
 <h3 class="tb_title">{{user.customer_basket}}</h3>
     <h6 class="invis">.</h6>
@@ -8,10 +9,14 @@
     {% for x in b %}
       <h6>{{x}}</h6>
       <p>£{{x.price}}</p>
+      <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_bouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
+      <h6 class="invis">.</h6>
     {% endfor %}
     {% for x in tb %}
       <h6>{{x}}</h6>
       <p>£{{x.price}}</p>
+      <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_tbouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
+      <h6 class="invis">.</h6>
     {% endfor %}
     <h6 class="invis">.</h6>
 
@@ -21,6 +26,8 @@
       {% for x in b %}
         <h6>{{x}}</h6>
         <p>£{{x.price}}</p>
+          <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_bouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
+          <h6 class="invis">.</h6>
       {% endfor %}
         <h6 class="invis">.</h6>
 
@@ -28,6 +35,8 @@
       {% for x in tb %}
         <h6>{{x}}</h6>
         <p>£{{x.price}}</p>
+          <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_tbouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
+          <h6 class="invis">.</h6>
       {% endfor %}
       <h6 class="invis">.</h6>
   {% endif %}
@@ -37,15 +46,17 @@
       <h6 class="invis">.</h6>
 
     {% if user.customer_account  %}
-      <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase_final' %}">Go to check out</a> *confirm address and create order*</h6>
+      <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase_final' %}">Go to check out</a></h6>
     {% else %}
-      <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase' %}">Go to check out</a> *create account and create order*</h6>
+      <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase' %}">Go to check out</a></h6>
       {% endif %}
     {% endif %}
 
 
 {% else %}
 
-  <h5>Create account and go to checkout button</h5>
+  <h6>Please sign up to place an order with us:</h6>
+  <h6 class="invis">.</h6>
+  <a class="btn btn-outline-success" href="{% url 'accounts:signup' %}">Sign up</a>
 
 {% endif %}

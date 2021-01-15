@@ -1,0 +1,36 @@
+{% extends 'site_base.html' %}
+
+{% block content_block %}
+
+  <h6 class="invis">.</h6>
+
+{% if object.colour %}
+
+    <h5>Are you sure you want to delete this colour?</h5>
+      <h6 class="invis">.</h6>
+      <h6 class="invis">.</h6>
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-outline-success" value="Delete">
+    </form>
+
+{% else %}
+
+    <h5>Are you sure you want to delete this type?</h5>
+      <h6 class="invis">.</h6>
+      <h6 class="invis">.</h6>
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-outline-success" value="Delete">
+    </form>
+
+{% endif %}
+
+
+<h6 class="invis">.</h6>
+<h6><a class="btn btn-outline-danger" href="{% url 'themed_products:themed_detail' pk=prev %}">Cancel</a></h6>
+
+
+{% endblock %}

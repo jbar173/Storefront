@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import (CreateView, DetailView,
                                 TemplateView, UpdateView,
                                 DeleteView,)
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import redirect
 
 from .models import (Theme,ThemedBouquet,
@@ -15,6 +15,23 @@ import re
 
 
 # Create your views here.
+
+class RandomCreateThemedBouquet(CreateView):
+    model = ThemedBouquet
+    fields = ()
+    template_name = 'products/shop_main.html'
+
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return redirect('themed_products:random_update', self.object.id)
+
+
+class RandomUpdateThemedBouquet(UpdateView):
+    model = ThemedBouquet
+    fields = ('price',)
+    template_name = 'themed_products/update_random.html'
+
 
 class CreateThemedBouquet(CreateView):
     model = ThemedBouquet
@@ -105,9 +122,29 @@ class CreateColourTheme(CreateView):
         return super().form_valid(form)
 
 
+class DeleteTheme(DeleteView):
+    model = Theme
+    template_name = 'themed_products/delete_theme.html'
+
+    def get_success_url(self,**kwargs):
+        b1 = self.request.META.get('HTTP_REFERER')
+        b2 = re.findall(r'/\d+',b1)[-1]
+        b3 = re.findall(r'\d+',b2)[0]
+        success_url = reverse_lazy('themed_products:themed_detail',kwargs={'pk':b3})
+        return success_url
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data()
+        b1 = self.request.META.get('HTTP_REFERER')
+        b2 = re.findall(r'/\d+',b1)[-1]
+        b3 = re.findall(r'\d+',b2)[0]
+        context['prev'] = b3
+        return context
+
+
 class DeleteThemedBouquet(DeleteView):
     model = ThemedBouquet
-    template_name = 'themed_products/delete_themed.html'
+    template_name = 'themed_products/delete_tbouquet.html'
     success_url = reverse_lazy('products:shop')
 
 
@@ -117,7 +154,6 @@ class UpdateTBouquet(UpdateView):
     form_class = forms.UpdateTBouquetForm
     template_name = 'themed_products/update_tbouquet.html'
     success_url = reverse_lazy('basket:create_basket')
-
 
 
 ### Update (condition: user already has basket):

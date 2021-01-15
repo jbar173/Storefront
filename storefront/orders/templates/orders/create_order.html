@@ -1,0 +1,39 @@
+{% extends 'site_base.html' %}
+{% load bootstrap3 %}
+
+{% block content_block %}
+
+  <h6 class="invis">.</h6>
+  <h3 class="tb_title">Confirm purchase:</h3>
+  <h6 class="invis">.</h6>
+    <h6 class="invis">.</h6>
+    <h6 class="invis">.</h6>
+
+
+    <h5>Please confirm your details:</h5>
+      <h6 class="invis">.</h6>
+      <h6 class="tb_title">Name:</h6>
+      <h6 class="invis">.</h6>
+      <p>{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
+      <h6 class="invis">.</h6>
+      <h6 class="tb_title">Billing address: </h6>
+      <h6 class="invis">.</h6>
+      <p>{{user.customer_account.billing_address}}</p>
+      <h6 class="invis">.</h6>
+      <h6 class="tb_title">Delivery address: </h6>
+      <h6 class="invis">.</h6>
+      <p>{{user.customer_account.delivery_address}}</p>
+
+
+  <h6 class="invis">.</h6>
+  <h6><a class="btn btn-outline-warning" href="{% url 'basket:update_purchase' pk=user.customer_account.pk %}">Edit Details</a></h6>
+
+    <form action="{% url 'basket:purchase_final' %}" method="post">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <input class="btn btn-outline-success" type="submit" value="Confirm and place order">
+      <h6 class="invis">.</h6>
+    </form>
+
+
+{% endblock %}

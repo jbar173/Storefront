@@ -12,10 +12,19 @@ import re
 
 # Create your views here.
 
+
 class FlowerCreate(CreateView):
     model = models.Flower
     form_class = forms.CreateFlowerForm
     template_name = 'products/create_flower.html'
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        b1 = self.request.META.get('HTTP_REFERER')
+        b2 = re.findall(r'/\d+',b1)[-1]
+        b3 = re.findall(r'\d+',b2)[0]
+        context['prev'] = b3
+        return context
 
     def form_valid(self,form):
         b1 = self.request.META.get('HTTP_REFERER')
@@ -26,6 +35,26 @@ class FlowerCreate(CreateView):
         self.object.bouquet = models.Bouquet.objects.get(id__iexact=b3)
         self.object.save()
         return super().form_valid(form)
+
+
+class FlowerDelete(DeleteView):
+    model = models.Flower
+    template_name = 'products/delete_flower.html'
+
+    def get_success_url(self,**kwargs):
+        b1 = self.request.META.get('HTTP_REFERER')
+        b2 = re.findall(r'/\d+',b1)[-1]
+        b3 = re.findall(r'\d+',b2)[0]
+        success_url = reverse_lazy('products:detail_bouquet',kwargs={'pk':b3})
+        return success_url
+
+    def get_context_data(self,*args,**kwargs):
+        context = super().get_context_data()
+        b1 = self.request.META.get('HTTP_REFERER')
+        b2 = re.findall(r'/\d+',b1)[-1]
+        b3 = re.findall(r'\d+',b2)[0]
+        context['prev'] = b3
+        return context
 
 
 def create_bouquet(request):
@@ -42,6 +71,7 @@ def create_bouquet(request):
             print("Error - form invalid")
 
     return render(request,'products/tailor_home.html',{'bouquet_form': new_bouquet})
+
 
 
 class BouquetDetail(DetailView):

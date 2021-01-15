@@ -10,20 +10,22 @@
 <div class="container-fluid">
 
   <h6 class="invis">.</h6>
-  <h3 class="tb_title">{{account.user.username}}'s Account Page!</h3>
+  <h3 class="tb_title">{{account.user.username}}'s Account Details!</h3>
   <h6 class="invis">.</h6>
   <h6 class="invis">.</h6>
-  <h4>Your details: </h4>
   <h6 class="invis">.</h6>
 
-  <table>
-    <td id="td_detail">
-    <h5>First name: {{account.first_name}}</h5>
-    <h5>Surname: {{account.surname}}</h5>
-    <h5>Billing address: {{account.billing_address}}</h5>
-    <h5>Delivery address: {{account.delivery_address}}</h5>
-      </td>
-  </table>
+  <h6 class="tb_title">Name:</h6>
+  <h6 class="invis">.</h6>
+  <p>{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
+  <h6 class="invis">.</h6>
+  <h6 class="tb_title">Billing address: </h6>
+  <h6 class="invis">.</h6>
+  <p>{{user.customer_account.billing_address}}</p>
+  <h6 class="invis">.</h6>
+  <h6 class="tb_title">Delivery address: </h6>
+  <h6 class="invis">.</h6>
+  <p>{{user.customer_account.delivery_address}}</p>
 
 <h6 class="invis">.</h6>
   <div class="edit-details">
@@ -32,7 +34,10 @@
 </div>
 <h6 class="invis">.</h6>
 <h6 class="invis">.</h6>
-  <h5>{ Order list for account injected here }</h5>
+<h6 class="invis">.</h6>
+  <h5 class="tb_title">Previous orders:</h5>
+  <h6 class="invis">.</h6>
+  <h6>{ Order list for account injected here }</h6>
 
 {% else %}
 

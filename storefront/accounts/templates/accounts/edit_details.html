@@ -2,10 +2,17 @@
 {% load bootstrap3 %}
 
 {% block content_block %}
-  <h3>Edit your details here:</h3>
+
+    <h6 class="invis">.</h6>
+  <h3 class="tb_title">Edit your details here:</h3>
+        <h6 class="invis">.</h6>
+        <h6 class="invis">.</h6>
+
   <form class="edit-details" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
+    <h6 class="invis">.</h6>
     <input class="btn btn-outline-success" type="submit" value="Update">
+    <h6 class="invis">.</h6>
   </form>
 {% endblock %}

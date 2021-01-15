@@ -15,6 +15,8 @@
   {% for flower in bouquet.flower.all %}
     <h6>{{flower}}</h5>
     <p>£{{flower.price}}</p>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'products:delete_flower' pk=flower.pk bouquet_id=bouquet.pk %}">Delete</a>
+      <h6 class="invis">.</h6>
   {% endfor %}
   <h6 class="invis">.</h6>
   <h5>Total: £{{total}}</h5>

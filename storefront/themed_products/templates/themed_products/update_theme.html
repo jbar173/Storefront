@@ -4,15 +4,19 @@
 
 {% block content_block %}
 
-
-<h5>Add colours/types:</h5>
+<h6 class="invis">.</h6>
+<h5 class="tb_title">Create your bouquet</h5>
+<h6 class="invis">.</h6>
+<h6 class="invis">.</h6>
 
 <form method="post">
   {% csrf_token %}
   {% bootstrap_form form %}
-  <input type="submit" class="btn btn-outline-warning" value="Add to bouquet">
+  <h6 class="invis">.</h6>
+  <input type="submit" class="btn btn-outline-success" value="Add to bouquet">
 </form>
 
-<h6><a href="{% url 'themed_products:themed_detail' pk=bouq %}">Back</a></h6>
+<h6 class="invis">.</h6>
+<h6><a class="btn btn-outline-warning" href="{% url 'themed_products:themed_detail' pk=bouq %}">Back</a></h6>
 
 {% endblock %}

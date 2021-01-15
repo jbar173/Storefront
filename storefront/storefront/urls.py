@@ -16,8 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url,include
-from accounts import urls
-from basket import urls
 from . import views
 
 urlpatterns = [
@@ -32,5 +30,6 @@ urlpatterns = [
     url(r'^basket/',include('basket.urls',namespace='basket')),
     url(r'^products/',include('products.urls',namespace='products')),
     url(r'^themed_products/',include('themed_products.urls',namespace='themed_products')),
+    url(r'^orders/',include('orders.urls',namespace='orders')),
 
 ]

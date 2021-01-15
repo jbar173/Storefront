@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView, CreateView,
-                                  DetailView, UpdateView,)
+                                  DetailView, UpdateView,
+                                  DeleteView,)
 from .models import Basket
 from . import forms
 from accounts.models import Account
@@ -70,23 +71,29 @@ class BasketMain(TemplateView):
         b1 = self.get_queryset()[0]
         b2 = []
         for z in b1:
-            b2.append(z)
+            if z.order:
+                continue
+            else:
+                b2.append(z)        ######## Not working
         tb1 = self.get_queryset()[1]
         tb2 = []
         for z in tb1:
-            tb2.append(z)
+            if z.order:
+                continue
+            else:
+                tb2.append(z)       ######## Not working
         context['b'] = b2
         context['tb'] = tb2
 
         result1 = 0
         result2 = 0
-        if len(b1) > 0:
-            for x in b1:
+        if len(b2) > 0:
+            for x in b2:
                 result1 += x.price
         if len(tb2) > 0:
             for x in tb2:
                 result2 += x.price
-        context['total'] = result1+result2
+        context['total'] = result1 + result2
         return context
 
     def get_queryset(self):
@@ -98,6 +105,18 @@ class BasketMain(TemplateView):
 
 class BasketTemp(TemplateView):
     template_name = "basket/basket_temp.html"
+
+
+class BasketBouquetDelete(DeleteView):
+    model = Bouquet
+    template_name = 'basket/basket_bouquet_delete.html'
+    success_url = reverse_lazy('basket:basket')
+
+
+class BasketTBouquetDelete(DeleteView):
+    model = ThemedBouquet
+    template_name = 'basket/basket_bouquet_delete.html'
+    success_url = reverse_lazy('basket:basket')
 
 
 class CreateAccountFromBasket(LoginRequiredMixin,CreateView):
@@ -113,15 +132,13 @@ class CreateAccountFromBasket(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
 
+
 class UpdateAccountFromBasket(LoginRequiredMixin,UpdateView):
     model = Account
     fields = ['first_name','surname','billing_address','delivery_address']
     template_name = 'accounts/edit_details.html'
-    success_url = reverse_lazy('basket:purchase_final') ## change to Order createview url
+    success_url = reverse_lazy('basket:purchase_final')
 
-
-class FinalConfirmView(TemplateView):
-    template_name = 'basket/confirm_purchase_final.html'
 
 
 ######### Views for Order model in basket:

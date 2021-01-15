@@ -3,12 +3,15 @@
 
 {% block content_block %}
 
-<h4>Choose your bouquet theme and size!</h4>
+    <h6 class="invis">.</h6>
+<h4 class="tb_title" >Choose your bouquet theme and size!</h4>
 
-
+    <h6 class="invis">.</h6>
+        <h6 class="invis">.</h6>
 <form method="post">
   {% csrf_token %}
   {% bootstrap_form form %}
+      <h6 class="invis">.</h6>
   <input type="submit" class="btn btn-outline-success" value="Confirm">
 </form>
 

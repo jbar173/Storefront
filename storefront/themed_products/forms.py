@@ -11,7 +11,7 @@ class CreateThemedBouquetForm(ModelForm):
 
     class Meta:
         model = ThemedBouquet
-        exclude = ('basket','price',)
+        exclude = ('basket','price','order',)
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -29,6 +29,7 @@ class CreateTypeThemeForm(ModelForm):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
+        self.fields['type'].label = 'New flower type:'
 
 
 
@@ -43,13 +44,15 @@ class CreateColourThemeForm(ModelForm):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
+        self.fields['colour'].label = 'New colour:'
+
 
 
 class UpdateTBouquetForm(ModelForm):
 
     class Meta:
         model = ThemedBouquet
-        exclude = ('price','basket','theme_name','size')
+        exclude = ('price','basket','theme_name','size','order',)
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)

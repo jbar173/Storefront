@@ -26,23 +26,23 @@
         <li class="list-inline-item"><a class="mylink" href="{% url 'about' %}">About</a></li>
       </ul>
 
-      <ul class="list-inline-mb-0">
-        {% if user.is_authenticated %}
+  <ul class="list-inline-mb-0">
+    {% if user.is_authenticated %}
 
           {% if user.customer_account %}
-              {% if user.customer_basket %}
-          <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:details' pk=user.customer_account.pk %}">Account</a></li>
-          <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:logout' %}">Log Out</a></li>
-          <li class="list-inline-item"><a class="mylink" href="{% url 'basket:basket' %}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
-  </svg></a></li>
-              {% elif user.customer_basket == False %}
-          <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:details' %}">Account</a></li>
-          <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:logout' %}">Log Out</a></li>
-          <li class="list-inline-item"><a class="mylink" href="{% url 'basket:basketx' %}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
-  </svg></a></li>
-              {% endif %}
+                {% if user.customer_basket %}
+            <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:details' pk=user.customer_account.pk %}">Account</a></li>
+            <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:logout' %}">Log Out</a></li>
+            <li class="list-inline-item"><a class="mylink" href="{% url 'basket:basket' %}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
+    </svg></a></li>
+                {% else %}
+            <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:details' pk=user.customer_account.pk %}">Account</a></li>
+            <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:logout' %}">Log Out</a></li>
+            <li class="list-inline-item"><a class="mylink" href="{% url 'basket:basketx' %}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
+    </svg></a></li>
+                {% endif %}
           {% elif user.customer_basket %}
           <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:create' %}">Account</a></li>
           <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:logout' %}">Log Out</a></li>
@@ -57,18 +57,17 @@
   </svg></a></li>
           {% endif %}
 
-        {% else %}
-          <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:login' %}">Log In</a></li>
-          <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:signup' %}">Sign Up</a></li>
-          <li class="list-inline-item"><a class="mylink" href="{% url 'basket:basketx' %}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
-  </svg></a></li>
-        {% endif %}
+    {% else %}
+      <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:login' %}">Log In</a></li>
+      <li class="list-inline-item"><a class="mylink" href="{% url 'accounts:signup' %}">Sign Up</a></li>
+      <li class="list-inline-item"><a class="mylink" href="{% url 'basket:basketx' %}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
+</svg></a></li>
+    {% endif %}
         </ul>
 
     </div>
   </nav>
-
 
     <div class="container">
       {% block content_block %}

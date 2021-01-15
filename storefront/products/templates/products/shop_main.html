@@ -1,4 +1,5 @@
 {% extends 'site_base.html' %}
+{% load bootstrap3 %}
 
 {% block content_block %}
 
@@ -17,7 +18,13 @@
 <h6 class="invis">.</h6>
   <h5>Or, let us design a random bouquet for you ;p :</h5>
   <h6 class="invis">.</h6>
-  <h4><a class="btn btn-outline-success" href="#">Surprise me!</a></h4>
+
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input class="btn btn-outline-success" type="submit" value="Surprise me!">
+  </form>
+
 
 
 {% endblock %}
