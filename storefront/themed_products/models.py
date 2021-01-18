@@ -17,8 +17,8 @@ THEME_CHOICES = [
     ('Type', 'Type'),
     ('Colour', 'Colour'),
     ('Type and Colour', 'Type and Colour'),
-
 ]
+
 
 # Create your models here.
 

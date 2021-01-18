@@ -1,0 +1,19 @@
+{% extends 'site_base.html' %}
+{% load bootstrap3 %}
+
+
+{% block content_block %}
+
+<h6 class="invis">.</h6>
+
+<h6>{{object_list|first|title}} range</h6>
+
+<h6 class="invis">.</h6>
+<h6 class="invis">.</h6>
+
+{% for x in object_list %}
+    {{x.r_bouquet|title}}
+    <h6>.</h6>
+    {% endfor %}
+
+{% endblock %}

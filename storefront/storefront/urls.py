@@ -31,5 +31,6 @@ urlpatterns = [
     url(r'^products/',include('products.urls',namespace='products')),
     url(r'^themed_products/',include('themed_products.urls',namespace='themed_products')),
     url(r'^orders/',include('orders.urls',namespace='orders')),
+    url(r'^range_products/',include('range_products.urls',namespace='range_products')),
 
 ]
