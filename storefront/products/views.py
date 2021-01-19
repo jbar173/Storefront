@@ -128,6 +128,11 @@ class DeleteBouquet(DeleteView):
     success_url = reverse_lazy('products:shop')
 
 
+class BasketBouquetDetail(DetailView):
+    model = models.Bouquet
+    template_name = 'products/basket_bouquet_detail.html'
+
+
 ########
 
 

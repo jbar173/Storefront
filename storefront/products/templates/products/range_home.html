@@ -14,31 +14,37 @@
 
 <div class="container">
   <div class="row">
-    <h5 class="tb_title_sm cen">Wild bouquets</h5>
-    <div class="col-lg-4 col-sm-4 col-xs-6">
+      <button class="tb_title_sm rng-button" type="button">
+        <a class="lnk" href="{% url 'range_products:range_list' range_name='wild'%}">
+        <h5 class="cen">Wild bouquets</h5></a>
+      </button>
+    <div class="col-lg-4 col-sm-4 col-xs-6 text-cen">
       <div>
         <a href="{% url 'range_products:range_list' range_name='wild'%}">
         <img class="img-thumbnail img-fluid" src="{% static "images/range/Wild.jpg" %}" alt="Error loading photo" href="{% url 'range_products:range_list' range_name='wild' %}">
         </a>
       </div>
       </div>
-    <div class="col-lg-4 col-sm-4 col-xs-6">
+    <div class="col-lg-4 col-sm-4 col-xs-6 text-cen">
       <div>
         <a href="{% url 'range_products:range_list' range_name='wild'%}">
         <img class="img-thumbnail img-fluid" src="{% static "images/range/Wild colour crop.jpg" %}" alt="Error loading photo">
         </a>
       </div>
       </div>
-    <div class="col-lg-4 col-sm-4 col-xs-6">
+    <div class="col-lg-4 col-sm-4 col-xs-6 text-cen">
       <div>
         <a href="{% url 'range_products:range_list' range_name='wild'%}">
         <img class="img-thumbnail img-fluid" src="{% static "images/range/Wild blues.jpg" %}" alt="Error loading photo">
         </a>
       </div>
   </div>
-  <div class="row" id="valentines">
+  <div class="row">
     <h6 class="invis">.</h6>
-    <h5 class="tb_title_sm cen">Valentines bouquets</h5>
+      <button class="tb_title_sm rng-button" type="button">
+        <a class="lnk" href="{% url 'range_products:range_list' range_name='Valentines' %}">
+          <h5 class="cen">Valentines bouquets</h5></a>
+      </button>
     <div class="col-lg-4 col-sm-4 col-xs-6">
       <div>
         <a href="{% url 'range_products:range_list' range_name='Valentines' %}">
@@ -61,9 +67,12 @@
       </div>
     </div>
   </div>
-  <div class="row" id="neutral">
+  <div class="row">
     <h6 class="invis">.</h6>
-    <h5 class="tb_title_sm cen">Neutral bouquets</h5>
+      <button class="tb_title_sm rng-button" type="button">
+      <a class="lnk" href="{% url 'range_products:range_list' range_name='neutral' %}">
+      <h5 class="cen">Neutral bouquets</h5></a>
+      </button>
     <div class="col-lg-4 col-sm-4 col-xs-6">
       <div>
         <a href="{% url 'range_products:range_list' range_name='neutral' %}">
@@ -86,9 +95,12 @@
       </div>
     </div>
   </div>
-  <div class="row" id="unusual">
+  <div class="row">
     <h6 class="invis">.</h6>
-    <h5 class="tb_title_sm cen">Unusual bouquets</h5>
+      <button class="tb_title_sm rng-button" type="button">
+        <a class="lnk" href="{% url 'range_products:range_list' range_name='unusual' %}">
+          <h5 class="cen">Unusual bouquets</h5></a>
+      </button>
     <div class="col-lg-4 col-sm-4 col-xs-6">
       <div>
         <a href="{% url 'range_products:range_list' range_name='unusual' %}">
@@ -99,21 +111,24 @@
     <div class="col-lg-4 col-sm-4 col-xs-6">
       <div>
         <a href="{% url 'range_products:range_list' range_name='unusual' %}">
-        <img class="img-thumbnail img-fluid" src="{% static "images/range/unusual2.jpg" %}" alt="Error loading photo">
+        <img class="img-thumbnail img-fluid" src="{% static "images/range/unusual3.jpg" %}" alt="Error loading photo">
         </a>
       </div>
       </div>
     <div class="col-lg-4 col-sm-4 col-xs-6">
       <div>
         <a href="{% url 'range_products:range_list' range_name='unusual' %}">
-        <img class="img-thumbnail img-fluid" src="{% static "images/range/unusual3.jpg" %}" alt="Error loading photo">
+        <img class="img-thumbnail img-fluid" src="{% static "images/range/unusual2.jpg" %}" alt="Error loading photo">
         </a>
       </div>
     </div>
   </div>
-  <div class="row" id="colourful">
+  <div class="row">
     <h6 class="invis">.</h6>
-    <h5 class="tb_title_sm cen">Colourful bouquets</h5>
+      <button class="tb_title_sm rng-button" type="button">
+        <a class="lnk" href="{% url 'range_products:range_list' range_name='colourful' %}">
+          <h5 class="cen">Colourful bouquets</h5></a>
+      </button>
     <div class="col-lg-4 col-sm-4 col-xs-6">
       <div>
         <a href="{% url 'range_products:range_list' range_name='colourful' %}">
@@ -136,9 +151,12 @@
       </div>
     </div>
   </div>
-  <div class="row" id="classic">
+  <div class="row">
     <h6 class="invis">.</h6>
-    <h5 class="tb_title_sm cen">Classic bouquets</h5>
+      <button class="tb_title_sm rng-button" type="button">
+        <a class="lnk" href="{% url 'range_products:range_list' range_name='classic' %}">
+          <h5 class="cen">Classic bouquets</h5></a>
+      </button>
     <div class="col-lg-4 col-sm-4 col-xs-6">
       <div>
         <a href="{% url 'range_products:range_list' range_name='classic' %}">

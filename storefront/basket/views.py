@@ -8,6 +8,7 @@ from . import forms
 from accounts.models import Account
 from products.models import Bouquet
 from themed_products.models import ThemedBouquet
+from range_products.models import RangeBouquet
 from django.urls import reverse_lazy
 import re
 from django.contrib.auth import get_user_model
@@ -82,24 +83,37 @@ class BasketMain(TemplateView):
                 continue
             else:
                 tb2.append(z)       ######## Not working
+        r1 = self.get_queryset()[2]
+        r2 = []
+        for z in r1:
+            if z.order:
+                continue
+            else:
+                r2.append(z)
         context['b'] = b2
         context['tb'] = tb2
+        context['r'] = r2
 
         result1 = 0
         result2 = 0
+        result3 = 0
         if len(b2) > 0:
             for x in b2:
                 result1 += x.price
         if len(tb2) > 0:
             for x in tb2:
                 result2 += x.price
-        context['total'] = result1 + result2
+        if len(r1) > 0:
+            for x in r2:
+                result3 += x.price
+        context['total'] = result1 + result2 + result3
         return context
 
     def get_queryset(self):
         x = Bouquet.objects.filter(basket=self.request.user.customer_basket)
         y = ThemedBouquet.objects.filter(basket=self.request.user.customer_basket)
-        return (x,y)
+        z = RangeBouquet.objects.filter(basket=self.request.user.customer_basket)
+        return (x,y,z)
 
 
 
@@ -115,6 +129,12 @@ class BasketBouquetDelete(DeleteView):
 
 class BasketTBouquetDelete(DeleteView):
     model = ThemedBouquet
+    template_name = 'basket/basket_bouquet_delete.html'
+    success_url = reverse_lazy('basket:basket')
+
+
+class BasketRBouquetDelete(DeleteView):
+    model = RangeBouquet
     template_name = 'basket/basket_bouquet_delete.html'
     success_url = reverse_lazy('basket:basket')
 

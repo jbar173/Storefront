@@ -15,6 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = Path(BASE_DIR,'templates').joinpath()
+MEDIA_DIR = Path(BASE_DIR,'media').joinpath()
 
 
 # Quick-start development settings - unsuitable for production
@@ -130,6 +131,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     Path(BASE_DIR,'static').joinpath(),
 ]
+
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'logged_in'
 LOGOUT_REDIRECT_URL = 'thanks'

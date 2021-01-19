@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^bouquet/(?P<pk>\d+)/update/$',views.UpdateBouquet.as_view(),name="update_bouquet"),
     url(r'^bouquet/(?P<pk>\d+)/updatetwo/$',views.UpdateBouquetTwo.as_view(),name="update_bouquet_two"),
     url(r'^bouquet/(?P<pk>\d+)/delete/$',views.DeleteBouquet.as_view(),name="delete_bouquet"),
+    url(r'^bouquetb/(?P<pk>\d+)/$',views.BasketBouquetDetail.as_view(),name="basket_bouquet"),
 
 ]
 

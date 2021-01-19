@@ -4,6 +4,7 @@ from django.views.generic import (CreateView, DetailView,)
 from .models import Order
 from products.models import Bouquet
 from themed_products.models import ThemedBouquet
+from range_products.models import RangeBouquet
 
 
 # Create your views here.
@@ -25,18 +26,21 @@ class CreateNewOrder(LoginRequiredMixin,CreateView):
         for x in queryset[0]:
             if x.order:
                 print("b continue")
-                continue
             else:
                 x.order = self.object
                 print(f"x.order: {x.order}")    ######## Not working
         for y in queryset[1]:
             if y.order:
                 print("tb continue")
-                continue
             else:
                 y.order = self.object
                 print(f"y.order: {y.order}")    ######## Not working
-
+        for z in queryset[2]:
+            if z.order:
+                print("r continue")
+            else:
+                z.order = self.object
+                print(f"z.order: {z.order}")
 
         # self.object.order_total = self.request.user.customer_basket.total  ###### fix
         ## On basket_detail template only show items not already associated with an order
@@ -48,4 +52,5 @@ class CreateNewOrder(LoginRequiredMixin,CreateView):
     def get_queryset(self):
         a = Bouquet.objects.filter(basket=self.request.user.customer_basket)
         b = ThemedBouquet.objects.filter(basket=self.request.user.customer_basket)
-        return (a,b)
+        c = RangeBouquet.objects.filter(basket=self.request.user.customer_basket)
+        return (a,b,c)

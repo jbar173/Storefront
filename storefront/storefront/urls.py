@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url,include
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
 
@@ -32,5 +34,4 @@ urlpatterns = [
     url(r'^themed_products/',include('themed_products.urls',namespace='themed_products')),
     url(r'^orders/',include('orders.urls',namespace='orders')),
     url(r'^range_products/',include('range_products.urls',namespace='range_products')),
-
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,78 @@
+{% extends 'site_base.html' %}
+
+
+{% block content_block %}
+
+<h6 class="invis">.</h6>
+<h5 class="tb_title">Your bouquet:</h5>
+<h6 class="invis">.</h6>
+
+<h6 class="invis">.</h6>
+
+{% if object.theme_name %}
+
+
+    <h6>{{object}}</h6>
+    <h6>Theme: By {{object.theme_name}}</h6>
+    <h6>Size: {{object.size}}</h6>
+    <h6>Price: £{{object.price}}</h6>
+
+{% else %}
+
+  <table>
+    <td id="td_detail">
+    <h6>{{object}}</h6>
+    <h6>Style: Random</h6>
+    <h6>Price: £{{object.price}}</h6>
+    </td>
+  </table>
+
+{% endif %}
+
+
+  <h6 class="invis">.</h6>
+  {% if object.theme_name == 'Type' %}
+  <h6 class="invis">.</h6>
+    <h6 class="tb_title col-md-3">Your flower types:</h6>
+    <h6 class="invis">.</h6>
+    {% for x in object.theme.all %}
+      {{x.type}}
+      <h6 class="invis">.</h6>
+      {% endfor %}
+
+  {% elif object.theme_name == 'Colour' %}
+  <h6 class="invis">.</h6>
+    <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
+    <h6 class="invis">.</h6>
+    {% for x in object.theme.all %}
+      {{x.colour}}
+      <h6 class="invis">.</h6>
+      {% endfor %}
+
+   {% elif object.theme_name == 'Type and Colour' %}
+   <h6 class="tb_title col-md-3">Your flower types:</h6>
+   <h6 class="invis">.</h6>
+       {% for x in object.theme.all %}
+         {% if x.type %}
+           {{x.type}}
+           <h6 class="invis">.</h6>
+          {% endif %}
+        {% endfor %}
+    <h6 class="invis">.</h6>
+    <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
+    <h6 class="invis">.</h6>
+    {% for x in object.theme.all %}
+      {% if x.colour %}
+      {{x.colour}}
+      <h6 class="invis">.</h6>
+      {% endif %}
+      {% endfor %}
+
+    {% else %}
+    <p></p>
+    {% endif %}
+
+<h6 class="invis">.</h6>
+<a class="btn btn-outline-danger" href="{% url 'basket:basket' %}">Back to basket</a>
+
+{% endblock %}

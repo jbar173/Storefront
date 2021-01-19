@@ -56,6 +56,11 @@ class ThemedBouquetDetail(DetailView):
     template_name = 'themed_products/themed_detail.html'
 
 
+class BasketThemedBouquetDetail(DetailView):
+    model = ThemedBouquet
+    template_name = 'themed_products/basket_tbouquet_detail.html'
+
+
 class CreateTypeTheme(CreateView):
     model = Type
     form_class = forms.CreateTypeThemeForm

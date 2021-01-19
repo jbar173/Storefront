@@ -1,0 +1,25 @@
+{% extends 'site_base.html' %}
+
+{% block content_block %}
+
+<h6 class="invis">.</h6>
+<h3 class="tb_title">Your bouquet:</h3>
+  <h6 class="invis">.</h6>
+  <h6 class="invis">.</h6>
+  {% for flower in object.flower.all %}
+    <h6>{{flower}}</h5>
+    <p>£{{flower.price}}</p>
+  {% endfor %}
+  <h6 class="invis">.</h6>
+  <h5>Total: £{{object.price}}</h5>
+  <h6 class="invis">.</h6>
+
+
+<h6 class="invis">.</h6>
+<h6 class="invis">.</h6>
+
+<a class="btn btn-outline-danger" href="{% url 'basket:basket' %}">Back to basket</a>
+
+
+
+{% endblock %}

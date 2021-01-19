@@ -10,12 +10,6 @@
   color:black;
 }
 
-#td_detail{
-  border: 2px dotted pink;
-  border-radius: 10px;
-  padding: 10px 10px 10px 10px;
-}
-
 .tb_title{
   border: 2px solid pink;
   border-radius: 6px;
@@ -26,7 +20,7 @@
 .tb_title_sm{
   border: 1px solid pink;
   border-radius: 6px;
-  padding: 8px 8px 10px 8px;
+  padding: 14px 8px 14px 8px;
   display: inline;
 }
 
@@ -45,7 +39,27 @@
   color: white;
 }
 
-/* .tiny{
-  height: 3vh;
-  width: 3vw;
-} */
+.rng-button{
+  background-color: white;
+}
+
+.lnk{
+  color: black;
+  text-decoration: none;
+}
+
+.lnk:hover{
+  color: black;
+  text-decoration: none;
+}
+
+.text-cen{
+  align-items: center;
+}
+
+.thumb-border{
+  border: 1px solid lightgrey;
+  border-left: white;
+  border-top: white;
+  border-radius: 18px;
+}

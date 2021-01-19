@@ -1,19 +1,45 @@
 {% extends 'site_base.html' %}
 {% load bootstrap3 %}
 
-
 {% block content_block %}
 
 <h6 class="invis">.</h6>
-
-<h6>{{object_list|first|title}} range</h6>
+<div class="container">
+  <div class="row">
+    <h4 class="tb_title_sm cen">{{object_list|first|title}}</h4>
+  </div>
+</div>
 
 <h6 class="invis">.</h6>
 <h6 class="invis">.</h6>
 
-{% for x in object_list %}
-    {{x.r_bouquet|title}}
-    <h6>.</h6>
+<div class="container">
+  {% for x in object_list %}
+    <div class="row text-cen thumb-border">
+      <div class="col-lg-6 col-sm-6 col-xs-6">
+        <img class="img-thumbnail img-fluid" src="{{x.r_bouquet.image.url}}" alt="Error loading photo">
+      </div>
+      <div class="col-lg-6 col-sm-6 col-xs-6">
+        <h6 class='cen'>{{x.r_bouquet|title}}</h6>
+        <p class='cen'>£{{x.r_bouquet.price|title}}</p>
+        <h6 class="invis">.</h6>
+          {% if user.customer_basket %}
+          <a class="btn btn-outline-success text-cen"
+          href="{% url 'range_products:create_two' slug=x.r_bouquet.slug range_name=x.name %}">
+          Add to basket</a>
+          {% else %}
+          <h6 class='text-cen'>*Add to basket btn, url 'range_products:create_one' item_nm=x.r_bouquet.item_name range_name=x.name</h6>
+          {% endif %}
+      </div>
+    </div>
     {% endfor %}
+</div>
+<h6 class="invis">.</h6>
+<h6 class="invis">.</h6>
+
+<a class="btn btn-outline-danger" href="{% url 'products:range' %}">Back</a>
+
+<h6 class="invis">.</h6>
+<h6 class="invis">.</h6>
 
 {% endblock %}
