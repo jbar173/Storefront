@@ -92,7 +92,10 @@ class UpdateBouquet(UpdateView):
     model = models.Bouquet
     form_class = forms.UpdateBouquetForm
     template_name = 'products/update_bouquet.html'
-    success_url = reverse_lazy('basket:create_basket')
+
+    def get_success_url(self):
+        success_url = reverse_lazy('basket:create_basket', kwargs={'b_model':'b','pk':self.object.pk})
+        return success_url
 
     def form_valid(self,form):
         self.object = form.save(commit=False)

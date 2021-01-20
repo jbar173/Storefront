@@ -2,11 +2,12 @@
 
 {% block content_block %}
 
+
   {% if user.customer_basket %}
     {% include 'basket/basket_detail.html' with bou='bou' %}
   {% else %}
-    <h6>No items in your basket!</h6>
+    <h6>Your basket is empty</h6>
   {% endif %}
 
-  
+
 {% endblock %}

@@ -158,7 +158,10 @@ class UpdateTBouquet(UpdateView):
     model = ThemedBouquet
     form_class = forms.UpdateTBouquetForm
     template_name = 'themed_products/update_tbouquet.html'
-    success_url = reverse_lazy('basket:create_basket')
+
+    def get_success_url(self):
+        success_url = reverse_lazy('basket:create_basket', kwargs={'b_model':'tb','pk':self.object.pk})
+        return success_url
 
 
 ### Update (condition: user already has basket):

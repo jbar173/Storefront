@@ -11,7 +11,7 @@ class CreateBasketForm(ModelForm):
 
     class Meta:
         model = models.Basket
-        exclude = ('user','order')
+        exclude = ('user','order','total')
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)

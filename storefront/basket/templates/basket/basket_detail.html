@@ -18,6 +18,7 @@
 
 
   {% if tb %}
+    <h6 class="invis">.</h6>
       {% for x in tb %}
         <h6>{{x}}</h6>
         <p>£{{x.price}}</p>
@@ -29,6 +30,7 @@
 
 
   {% if r %}
+    <h6 class="invis">.</h6>
       {% for x in r %}
         <h6>{{x|title}} bouquet</h6>
         <p>£{{x.price}}</p>
@@ -40,16 +42,20 @@
   {% endif %}
 
 
-{% if b or tb or r %}
-  <h5>Total: £{{total}}</h5>
-      <h6 class="invis">.</h6>
+  {% if b or tb or r %}
+  <h6 class="invis">.</h6>
+    <h5>Total: £{{total}}</h5>
+        <h6 class="invis">.</h6>
 
-    {% if user.customer_account  %}
-      <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase_final' %}">Go to check out</a></h6>
+      {% if user.customer_account  %}
+        <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase_final' %}">Go to check out</a></h6>
+      {% else %}
+        <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase' %}">Go to check out</a></h6>
+        {% endif %}
     {% else %}
-      <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase' %}">Go to check out</a></h6>
+    <h6 class="invis">.</h6>
+    <h5>Your basket is empty.</h5>
       {% endif %}
-    {% endif %}
 
 
 {% else %}

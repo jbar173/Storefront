@@ -7,7 +7,7 @@ app_name = 'basket'
 
 urlpatterns = [
 
-    url(r'^create/$',views.CreateBasket.as_view(),name='create_basket'),
+    url(r'^create/(?P<b_model>[-\w]+)/(?P<pk>\d+)/$',views.CreateBasket.as_view(),name='create_basket'),
     url(r'^$',views.BasketMain.as_view(),name='basket'),
     url(r'^x/$',views.BasketTemp.as_view(),name='basketx'),
     url(r'^(?P<pk>\d+)/$',views.BasketDetail.as_view(),name='basket_detail'),

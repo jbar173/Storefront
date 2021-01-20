@@ -19,20 +19,3 @@ urlpatterns = [
     url(r'^bouquetb/(?P<pk>\d+)/$',views.BasketBouquetDetail.as_view(),name="basket_bouquet"),
 
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-####### basket urls?:
-
-
-    # url(r'^orders/$',views.OrderList.as_view(),name='orders'),
-    # url(r'^order/pk<order>.../$',views.SingleOrder.as_view(),name='single'),

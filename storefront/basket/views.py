@@ -8,11 +8,12 @@ from . import forms
 from accounts.models import Account
 from products.models import Bouquet
 from themed_products.models import ThemedBouquet
-from range_products.models import RangeBouquet
+from range_products.models import RangeBouquet, Range
 from django.urls import reverse_lazy
 import re
 from django.contrib.auth import get_user_model
 User = get_user_model()
+
 
 
 # Create your views here.
@@ -23,31 +24,53 @@ class CreateBasket(CreateView):
     form_class = forms.CreateBasketForm
     template_name = 'basket/create_basket.html'
 
-    def get_success_url(self):
+    def get_success_url(self,**kwargs):
         bas = self.request.user.customer_basket
-        success_url = reverse_lazy('products:update_bouquet_two', kwargs={'pk':bas.b_id_num})
+        if self.kwargs['b_model']== 'b':
+            success_url = reverse_lazy('products:update_bouquet_two', kwargs={'pk':bas.b_id_num})
+        elif self.kwargs['b_model']== 'tb':
+            success_url = reverse_lazy('themed_products:update_tbouquet_two', kwargs={'pk':bas.b_id_num})
+        else:
+            success_url = reverse_lazy('range_products:update_rbouquet', kwargs={'pk':bas.b_id_num})
         return success_url
 
     def get_context_data(self, **kwargs):
         context = super(CreateBasket,self).get_context_data(**kwargs)
         b1 = self.request.META.get('HTTP_REFERER')
+
         b2 = re.findall(r'/\d+',b1)[-1]
         b3 = re.findall(r'\d+',b2)[0]
         context['bouq'] = b3
+
         res = False
         pattern = ['tbouquet']
         if re.search(pattern[0],b1):
             res = True
         context['tb'] = res
+
+        pattern3 = ['/[-\w]+']
+        range_results = []
+        range_results = re.findall(pattern3[0],b1)
+        range_results2 = [x.strip('/') for x in range_results]
+
+        a = self.get_queryset()
+        res2 = [x for x in a if x.name == range_results[-2]]
+        rb = False
+        if res2:
+            rb = True
+        context['r'] = rb
+        context['rng_nm'] = range_results2[-2]
+        context['r_slug'] = range_results2[-1]
         return context
 
-    def get_initial(self):
+    def get_initial(self,**kwargs):
         initial = super().get_initial()
-        b1 = self.request.META.get('HTTP_REFERER')
-        b2 = re.findall(r'/\d+',b1)[-1]
-        b3 = re.findall(r'\d+',b2)[0]
-        initial['b_id_num'] = b3
+        b1 = self.kwargs['pk']
+        initial['b_id_num'] = b1
         return initial
+
+    def get_queryset(self):
+        return Range.objects.all()
 
     def form_valid(self,form):
         self.object = form.save(commit=False)

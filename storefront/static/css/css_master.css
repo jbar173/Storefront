@@ -6,9 +6,35 @@
   background-color:pink;
 }
 
+.mybrand:hover{
+  font-family: 'Marck Script', cursive;
+  font-size: 1.75em;
+  color: white;
+  background-color:pink;
+}
+
 .mylink{
   color:black;
+  text-decoration: none;
 }
+
+.mylink:hover{
+  color: black;
+  text-decoration: none;
+}
+
+.mytxtlink{
+  color: black;
+  text-decoration: none;
+  padding-bottom: 5.5px;
+}
+
+.mytxtlink:hover{
+  color: black;
+  text-decoration: none;
+  padding-bottom: 5.5px;
+}
+
 
 .tb_title{
   border: 2px solid pink;

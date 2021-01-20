@@ -28,7 +28,9 @@
           href="{% url 'range_products:create_two' slug=x.r_bouquet.slug range_name=x.name %}">
           Add to basket</a>
           {% else %}
-          <h6 class='text-cen'>*Add to basket btn, url 'range_products:create_one' item_nm=x.r_bouquet.item_name range_name=x.name</h6>
+          <a class="btn btn-outline-success text-cen"
+          href="{% url 'range_products:create_one' slug=x.r_bouquet.slug range_name=x.name %}">
+          Add to basket</a>
           {% endif %}
       </div>
     </div>

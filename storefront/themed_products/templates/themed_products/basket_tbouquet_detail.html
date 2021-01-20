@@ -11,26 +11,27 @@
 
 {% if object.theme_name %}
 
-
     <h6>{{object}}</h6>
     <h6>Theme: By {{object.theme_name}}</h6>
     <h6>Size: {{object.size}}</h6>
     <h6>Price: £{{object.price}}</h6>
 
+     <h6 class="invis">.</h6>
+     <h6 class="invis">.</h6>
+
 {% else %}
 
-  <table>
-    <td id="td_detail">
     <h6>{{object}}</h6>
     <h6>Style: Random</h6>
     <h6>Price: £{{object.price}}</h6>
-    </td>
-  </table>
+
+
+   <h6 class="invis">.</h6>
+   <h6 class="invis">.</h6>
 
 {% endif %}
 
 
-  <h6 class="invis">.</h6>
   {% if object.theme_name == 'Type' %}
   <h6 class="invis">.</h6>
     <h6 class="tb_title col-md-3">Your flower types:</h6>
@@ -74,5 +75,6 @@
 
 <h6 class="invis">.</h6>
 <a class="btn btn-outline-danger" href="{% url 'basket:basket' %}">Back to basket</a>
+<h6 class="invis">.</h6>
 
 {% endblock %}
