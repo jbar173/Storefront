@@ -41,12 +41,6 @@ class CreateThemedBouquet(CreateView):
     def form_valid(self,form):
         self.object = form.save(commit=False)
         self.object.price = self.object.size.price
-        x = Theme.objects.all()
-        for y in x:
-            print(f"y1: {y}")
-            if y.name == self.object.theme_name:
-                print(f"y2: {y}")
-                y.t_bouquet = self.object
         self.object.save()
         return super().form_valid(form)
 

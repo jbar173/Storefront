@@ -4,6 +4,8 @@
 {% block content_block %}
 
 <h6 class="invis">.</h6>
+<h4>Let us design a bouquet for you!</h4>
+<h6 class="invis">.</h6>
 <form method="post">
   {% csrf_token %}
     <h5>How much would you like to spend?</h5>
@@ -14,6 +16,6 @@
   <h6 class="invis">.</h6>
 </form>
 
-<h6><a class="btn btn-outline-warning" href="{% url 'products:shop' %}">Cancel</a></h6>
+<h6><a class="btn btn-outline-danger" href="{% url 'products:shop' %}">Cancel</a></h6>
 
 {% endblock %}

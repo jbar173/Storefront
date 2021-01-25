@@ -7,6 +7,7 @@ from .models import Basket
 from . import forms
 from accounts.models import Account
 from products.models import Bouquet
+from orders.models import Order
 from themed_products.models import ThemedBouquet
 from range_products.models import RangeBouquet, Range
 from django.urls import reverse_lazy
@@ -15,9 +16,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-
 # Create your views here.
-
 
 class CreateBasket(CreateView):
     model = Basket
@@ -52,11 +51,8 @@ class CreateBasket(CreateView):
         range_results = []
         range_results = re.findall(pattern3[0],b1)
         range_results2 = [x.strip('/') for x in range_results]
-
-        a = self.get_queryset()
-        res2 = [x for x in a if x.name == range_results[-2]]
         rb = False
-        if res2:
+        if self.kwargs['b_model'] == 'r':
             rb = True
         context['r'] = rb
         context['rng_nm'] = range_results2[-2]
@@ -80,64 +76,46 @@ class CreateBasket(CreateView):
         return super().form_valid(form)
 
 
-
 class BasketDetail(DetailView):
     model = Basket
     template_name = "basket/basket_detail.html"
 
 
-
-class BasketMain(TemplateView):
+class BasketMain(CreateView):
+    model = Order
     template_name = "basket/basket.html"
+    fields = ()
 
-    def get_context_data(self, **kwargs):
+    def get_success_url(self,**kwargs):
+        if self.request.user.customer_account:
+            success_url = reverse_lazy('basket:purchase_final')
+        else:
+            success_url = reverse_lazy('basket:purchase')
+        return success_url
+
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.account = self.request.user.customer_account
+        self.object.save()
+        return super().form_valid(form)
+
+    def get_context_data(self,*args,**kwargs):
         context = super(BasketMain,self).get_context_data(**kwargs)
-        b1 = self.get_queryset()[0]
-        b2 = []
-        for z in b1:
-            if z.order:
-                continue
-            else:
-                b2.append(z)        ######## Not working
-        tb1 = self.get_queryset()[1]
-        tb2 = []
-        for z in tb1:
-            if z.order:
-                continue
-            else:
-                tb2.append(z)       ######## Not working
-        r1 = self.get_queryset()[2]
-        r2 = []
-        for z in r1:
-            if z.order:
-                continue
-            else:
-                r2.append(z)
-        context['b'] = b2
-        context['tb'] = tb2
-        context['r'] = r2
-
-        result1 = 0
-        result2 = 0
-        result3 = 0
-        if len(b2) > 0:
-            for x in b2:
-                result1 += x.price
-        if len(tb2) > 0:
-            for x in tb2:
-                result2 += x.price
-        if len(r1) > 0:
-            for x in r2:
-                result3 += x.price
-        context['total'] = result1 + result2 + result3
+        b = Bouquet.objects.filter(basket=self.request.user.customer_basket)
+        tb = ThemedBouquet.objects.filter(basket=self.request.user.customer_basket)
+        r = RangeBouquet.objects.filter(basket=self.request.user.customer_basket)
+        result = 0
+        if len(b) > 0:
+            for x in b:
+                result += x.price
+        if len(tb) > 0:
+            for x in tb:
+                result += x.price
+        if len(r) > 0:
+            for x in r:
+                result += x.price
+        context = {'b':b,'tb':tb,'r':r,'total':result}
         return context
-
-    def get_queryset(self):
-        x = Bouquet.objects.filter(basket=self.request.user.customer_basket)
-        y = ThemedBouquet.objects.filter(basket=self.request.user.customer_basket)
-        z = RangeBouquet.objects.filter(basket=self.request.user.customer_basket)
-        return (x,y,z)
-
 
 
 class BasketTemp(TemplateView):
@@ -175,33 +153,11 @@ class CreateAccountFromBasket(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
 
-
 class UpdateAccountFromBasket(LoginRequiredMixin,UpdateView):
     model = Account
     fields = ['first_name','surname','billing_address','delivery_address']
     template_name = 'accounts/edit_details.html'
-    success_url = reverse_lazy('basket:purchase_final')
 
-
-
-######### Views for Order model in basket:
-
-# class OrderList(LoginRequiredMixin,SelectRelatedMixin,ListView):
-#     model = models.Order
-#     select_related = ['account','order']
-
-    # def get_queryset(self):
-        # try:
-        #     queryset = super().get_queryset(model=Account?) ???
-        #     return queryset.filter(customer_id__exact=self.kwargs.get('username'))
-        ### ^ Get an account with this specific customer variable
-
-        # except DoesNotExist:
-                ## redirect to CreateAccount view.
-        #### ^ if an account with this specific customer variable doesn't exist
-
-# class OrderList(TemplateView):
-#     template_name = 'accounts/_order_list.html'
-#
-# class EditSuccess(TemplateView):
-#     template_name = 'edit_success.html'
+    def get_success_url(self,**kwargs):
+        success_url = reverse_lazy('basket:basket')
+        return success_url

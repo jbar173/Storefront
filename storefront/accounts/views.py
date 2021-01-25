@@ -7,6 +7,7 @@ from django.views.generic import (CreateView, UpdateView,
                                 TemplateView,)
 from . import forms
 from . import models
+from orders.models import Order
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.http import Http404
@@ -34,6 +35,12 @@ class CreateAccount(LoginRequiredMixin,CreateView):
 class DisplayDetails(DetailView,SelectRelatedMixin):
     model = models.Account
     template_name = 'accounts/display_details.html'
+
+    def get_context_data(self,*args,**kwargs):
+        context = super(DisplayDetails,self).get_context_data(*args,**kwargs)
+        q = Order.objects.filter(account=self.request.user.customer_account)
+        context['customer_orders'] = q
+        return context
 
 class EditAccount(LoginRequiredMixin,UpdateView):
     model = models.Account

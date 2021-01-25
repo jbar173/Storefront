@@ -2,14 +2,42 @@
 
 {% block content_block %}
 
+<h2>Thank you for your order!</h2>
 
 <h6 class="invis">.</h6>
 <h5 class="tb_title">{{object}}</h5>
+<h6 class="invis">.</h6>
+
+<h6>{{object.order_date|date}}</h6>
+
+<h6 class="invis">.</h6>
+
+
+<h6>Your order items:</h6>
+<h6 class="invis">.</h6>
+<h6 class="invis">.</h6>
+{% for x in b %}
+{{x}}
+<h6 class="invis">.</h6>
+{% endfor %}
+{% for x in t %}
+{{x}}
+<h6 class="invis">.</h6>
+{% endfor %}
+{% for x in r %}
+{{x|title}}
+<h6 class="invis">.</h6>
+{% endfor %}
+
+<h6 class="invis">.</h6>
+
+<h6>Total: £{{object.order_total}}</h6>
+<h6>{{object.account}}</h6>
+
 
 <h6 class="invis">.</h6>
 <h6 class="invis">.</h6>
-
 <h6>(inject onto account page)</h6>
-
+<h6 class="invis">.</h6>
 
 {% endblock %}

@@ -1,5 +1,4 @@
 {% extends 'site_base.html' %}
-{% load bootstrap3 %}
 
 {% block content_block %}
 
@@ -28,9 +27,9 @@
   <h6 class="invis">.</h6>
   <h6><a class="btn btn-outline-warning" href="{% url 'basket:update_purchase' pk=user.customer_account.pk %}">Edit Details</a></h6>
 
-    <form action="{% url 'basket:purchase_final' %}" method="post">
+    <form method="post">
       {% csrf_token %}
-      {% bootstrap_form form %}
+      {{bouquet_order_form.as_p}}
       <input class="btn btn-outline-success" type="submit" value="Confirm and place order">
       <h6 class="invis">.</h6>
     </form>

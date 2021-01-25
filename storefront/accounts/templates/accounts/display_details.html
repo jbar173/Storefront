@@ -37,7 +37,15 @@
 <h6 class="invis">.</h6>
   <h5 class="tb_title">Previous orders:</h5>
   <h6 class="invis">.</h6>
-  <h6>{ Order list for account injected here }</h6>
+    <h6 class="invis">.</h6>
+
+<div class="container">
+
+  {% for x in customer_orders %}
+      {{x}}
+      <h6 class="invis">.</h6>
+      {% endfor %}
+  </div>
 
 {% else %}
 

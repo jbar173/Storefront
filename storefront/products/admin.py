@@ -3,8 +3,6 @@ from django.conf import settings
 from .models import (Type,Colour,Flower,
                     Bouquet,)
 
-
-
 # Register your models here.
 
 admin.site.register(Type)

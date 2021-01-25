@@ -1,67 +1,77 @@
+
 {% if user.is_authenticated %}
 
-<h6 class="invis">.</h6>
-<h3 class="tb_title">{{user.customer_basket}}</h3>
-    <h6 class="invis">.</h6>
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-6 col-xs-6 thumb-border-full">
 
-
-  {% if b %}
-      <h6 class="invis">.</h6>
-      {% for x in b %}
-        <h6>{{x}}</h6>
-        <p>£{{x.price}}</p>
-        <a class="btn btn-outline-success btn-sm" href="{% url 'products:basket_bouquet' pk=x.pk %}">Details</a>
-          <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_bouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
-          <h6 class="invis">.</h6>
-      {% endfor %}
-  {% endif %}
-
-
-  {% if tb %}
-    <h6 class="invis">.</h6>
-      {% for x in tb %}
-        <h6>{{x}}</h6>
-        <p>£{{x.price}}</p>
-        <a class="btn btn-outline-success btn-sm" href="{% url 'themed_products:basket_tbouquet' pk=x.pk %}">Details</a>
-          <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_tbouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
-          <h6 class="invis">.</h6>
-      {% endfor %}
-  {% endif %}
-
-
-  {% if r %}
-    <h6 class="invis">.</h6>
-      {% for x in r %}
-        <h6>{{x|title}} bouquet</h6>
-        <p>£{{x.price}}</p>
-        <a class="btn btn-outline-success btn-sm" href="{% url 'range_products:r_bouquet_detail' pk=x.pk %}">Details</a>
-          <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_rbouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
-          <h6 class="invis">.</h6>
-      {% endfor %}
-      <h6 class="invis">.</h6>
-  {% endif %}
-
-
-  {% if b or tb or r %}
-  <h6 class="invis">.</h6>
-    <h5>Total: £{{total}}</h5>
         <h6 class="invis">.</h6>
+        <h3 class="tb_title_b">{{user.customer_basket}}</h3>
+            <h6 class="invis">.</h6>
 
-      {% if user.customer_account  %}
-        <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase_final' %}">Go to check out</a></h6>
-      {% else %}
-        <h6> <a class="btn btn-outline-success" href="{% url 'basket:purchase' %}">Go to check out</a></h6>
-        {% endif %}
+
+          {% if b %}
+              <h6 class="invis">.</h6>
+              {% for x in b %}
+                <h6>{{x}}</h6>
+                <p>£{{x.price}}</p>
+                <a class="btn btn-outline-success btn-sm" href="{% url 'products:basket_bouquet' pk=x.pk %}">Details</a>
+                  <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_bouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
+                  <h6 class="invis">.</h6>
+              {% endfor %}
+          {% endif %}
+
+
+          {% if tb %}
+            <h6 class="invis">.</h6>
+              {% for x in tb %}
+                <h6>{{x}}</h6>
+                <p>£{{x.price}}</p>
+                <a class="btn btn-outline-success btn-sm" href="{% url 'themed_products:basket_tbouquet' pk=x.pk %}">Details</a>
+                  <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_tbouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
+                  <h6 class="invis">.</h6>
+              {% endfor %}
+          {% endif %}
+
+
+          {% if r %}
+            <h6 class="invis">.</h6>
+              {% for x in r %}
+                <h6>{{x|title}} bouquet</h6>
+                <p>£{{x.price}}</p>
+                <a class="btn btn-outline-success btn-sm" href="{% url 'range_products:r_bouquet_detail' pk=x.pk %}">Details</a>
+                  <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_rbouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
+                  <h6 class="invis">.</h6>
+              {% endfor %}
+              <h6 class="invis">.</h6>
+          {% endif %}
+
+
+          {% if b or tb or r %}
+          <h6 class="invis">.</h6>
+            <h5>Total: £{{total}}</h5>
+                <h6 class="invis">.</h6>
+            <form method="post">
+              {% csrf_token %}
+              {{form.as_p}}
+              <input class="btn btn-outline-success" type="submit" value="Go to Checkout">
+            </form>
+            <h6 class="invis">.</h6>
+          {% else %}
+            <h6 class="invis">.</h6>
+            <h5>Your basket is empty.</h5>
+            <h6 class="invis">.</h6>
+          {% endif %}
+
+
     {% else %}
-    <h6 class="invis">.</h6>
-    <h5>Your basket is empty.</h5>
-      {% endif %}
 
+      <h6>Please sign up to place an order with us:</h6>
+      <h6 class="invis">.</h6>
+      <a class="btn btn-outline-success" href="{% url 'accounts:signup' %}">Sign up</a>
 
-{% else %}
+    {% endif %}
 
-  <h6>Please sign up to place an order with us:</h6>
-  <h6 class="invis">.</h6>
-  <a class="btn btn-outline-success" href="{% url 'accounts:signup' %}">Sign up</a>
-
-{% endif %}
+        </div>
+    </div>
+</div>

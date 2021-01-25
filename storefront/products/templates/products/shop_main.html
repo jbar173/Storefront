@@ -1,30 +1,33 @@
 {% extends 'site_base.html' %}
+{% load static %}
 {% load bootstrap3 %}
 
 {% block content_block %}
 
-<h6 class="invis">.</h6>
-  <h3 class="tb_title">Welcome to the shop!</h3>
-  <h6 class="invis">.</h6>
-<h6 class="invis">.</h6>
- <h5>Pics here</h5>
-<h6 class="invis">.</h6>
+<div class="container width-full">
+  <div class="row">
+    <img src="{% static "images/titles/shopfinal.png" %}" alt="Error loading photo">
+      <h6 class="invis">.</h6>
+    </div>
+</div>
 
- <h4><a class="btn btn-outline-success" href="{% url 'products:range' %}">Browse our range</a></h4>
+<div class="container width-full">
+  <div class="row">
+    <div class="col-lg-4 col-sm-4 col-xs-6 cen">
+      <a class="btn btn-outline-success" style="width:100%" href="{% url 'products:range' %}">Browse our range</a>
+    </div>
+    <div class="col-lg-4 col-sm-4 col-xs-6 cen">
+      <a class="btn btn-outline-success btn-block" style="width:100%" href="{% url 'products:tailor' %}">Design your own bouquet</a>
+    </div>
+    <div class="col-lg-4 col-sm-4 col-xs-6 cen">
+      <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input class="btn btn-outline-success" style="width:100%" type="submit" value="Surprise me!">
+      </form>
+    </div>
+  </div>
+</div>
 <h6 class="invis">.</h6>
-<h4><a class="btn btn-outline-success" href="{% url 'products:tailor' %}">Design your own bouquet</a></h4>
-
-  <h6 class="invis">.</h6>
-<h6 class="invis">.</h6>
-  <h5>Or, let us design a random bouquet for you ;p :</h5>
-  <h6 class="invis">.</h6>
-
-  <form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <input class="btn btn-outline-success" type="submit" value="Surprise me!">
-  </form>
-
-
 
 {% endblock %}

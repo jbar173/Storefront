@@ -15,7 +15,6 @@ User = get_user_model()
 
 # Create your models here.
 
-
 class Colour(models.Model):
     name = models.CharField(max_length=50)
     price = models.DecimalField(decimal_places=2,max_digits=8)
