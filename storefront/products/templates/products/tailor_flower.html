@@ -3,35 +3,61 @@
 {% block content_block %}
 
 {% if bouquet.flower.count < 1 %}
-  <h6 class="invis">.</h6>
-  <h5>No flowers in your bouquet yet!</h5>
-  <p class="invis">.</p>
-  <h5>Total: £{{bouquet.price}}</h5>
+
+<div class="container-fluid">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-12 pale-image text-cen">
+      <br><br><br>
+      <h5>No flowers in your bouquet yet!</h5>
+      <br><br><br>
+      <h5>Total: £{{bouquet.price}}</h5>
+      <br><br><br>
+    </div>
+  </div>
+</div>
+
 {% else %}
-<h6 class="invis">.</h6>
-<h3 class="tb_title">In your bouquet:</h3>
-  <h6 class="invis">.</h6>
-  <h6 class="invis">.</h6>
-  {% for flower in bouquet.flower.all %}
-    <h6>{{flower}}</h5>
-    <p>£{{flower.price}}</p>
-    <a class="btn btn-outline-danger btn-sm" href="{% url 'products:delete_flower' pk=flower.pk bouquet_id=bouquet.pk %}">Delete</a>
-      <h6 class="invis">.</h6>
-  {% endfor %}
-  <h6 class="invis">.</h6>
-  <h5>Total: £{{total}}</h5>
-  <h6 class="invis">.</h6>
+
+<div class="container-fluid">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-12 pale-image text-cen">
+      <br><br><br>
+      <h3 class="tb_title">In your bouquet:</h3>
+      <br><br><br>
+        {% for flower in bouquet.flower.all %}
+          <h6>{{flower}}</h5>
+          <p>£{{flower.price}}</p>
+          <a class="btn btn-outline-danger btn-sm" href="{% url 'products:delete_flower' pk=flower.pk bouquet_id=bouquet.pk %}">Delete</a>
+            <br><br><br>
+        {% endfor %}
+        <h5>Total: £{{total}}</h5>
+        <br><br>
+      </div>
+    </div>
+  </div>
+
 {% endif %}
 
-
-<h6> <a class="btn btn-outline-warning" href="{% url 'products:create_single' bouquet_id=bouquet.pk %}">Add a flower</a></h6>
-
-{% if user.customer_basket %}
-<h6><a class="btn btn-outline-success" href="{% url 'products:update_bouquet_two' pk=bouquet.pk %}">Save bouquet to basket</a></h6>
-{% else %}
-<h6><a class="btn btn-outline-success" href="{% url 'products:update_bouquet' pk=bouquet.pk %}">Save bouquet to basket</a></h6>
-{% endif %}
-
-<h6><a class="btn btn-outline-danger" href="{% url 'products:delete_bouquet' pk=bouquet.pk %}">Discard bouquet</a></h6>
+<div class="container-fluid">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-12 text-cen">
+      <div class="row text-cen cen">
+          <div class="col text-cen">
+          <h6 class="text-cen cen"><a class="btn btn-outline-danger" href="{% url 'products:delete_bouquet' pk=bouquet.pk %}">Discard all</a></h6>
+            </div>
+          <div class="col text-cen">
+          <h6 class="text-cen cen"> <a class="btn btn-outline-warning" href="{% url 'products:create_single' bouquet_id=bouquet.pk %}">Add a flower</a></h6>
+            </div>
+          <div class="col text-cen">
+            {% if user.customer_basket %}
+            <h6 class="text-cen cen"><a class="btn btn-outline-success" href="{% url 'products:update_bouquet_two' pk=bouquet.pk %}">Save bouquet</a></h6>
+            {% else %}
+            <h6 class="text-cen cen"><a class="btn btn-outline-success" href="{% url 'products:update_bouquet' pk=bouquet.pk %}">Save bouquet</a></h6>
+            {% endif %}
+              </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

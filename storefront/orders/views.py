@@ -22,7 +22,7 @@ class OrderDetail(DetailView):
         b = Bouquet.objects.filter(order_id=self.object.pk)
         t = ThemedBouquet.objects.filter(order_id=self.object.pk)
         r = RangeBouquet.objects.filter(order_id=self.object.pk)
-        context= {'b':b,'t':t,'r':r}
+        context= {'b':b,'t':t,'r':r,'object':self.object}
         return context
 
 

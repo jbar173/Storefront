@@ -74,11 +74,13 @@
       {% endblock %}
     </div>
 
+{% if request.user.is_superuser %}
 <nav class="navbar mynavbtm fixed-bottom">
   <div class="navbar-nav fixed-bottom">
       <li><a class="mylink smol" href="{% url 'admin:login' %}">admin</a></li>
   </div>
 </nav>
+{% endif %}
 
 
 </body>

@@ -21,7 +21,12 @@
 <h6 class="invis">.</h6>
 <h6 class="invis">.</h6>
 
-<a class="btn btn-outline-danger" href="{% url 'basket:basket' %}">Back to basket</a>
+{% if object.basket %}
+<a class="btn btn-outline-warning" href="{% url 'basket:basket' %}">Back to basket</a>
+{% else %}
+<a class="btn btn-outline-warning" href="{% url 'orders:detail' pk=object.order.pk %}">Back to order</a>
+{% endif %}
+
 
 <h6 class="invis">.</h6>
 <h6 class="invis">.</h6>

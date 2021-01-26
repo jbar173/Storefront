@@ -1,19 +1,25 @@
 {% extends 'site_base.html' %}
 {% load bootstrap3 %}
+{% load static %}
 
 {% block content_block %}
-<h6 class="invis">.</h6>
-<h3 class="tb_title">Design your flower:</h3>
-<h6 class="invis">.</h6>
+<div class="container-fluid">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-12 formimage text-cen">
+      <br><br><br>
+      <h3 class="tb_title txt-white">Design your flower</h3>
+      <br><br><br><br>
+      <form class="create_flower txt-white text-cen" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <br><br>
+        <input type="submit" class="btn btn-success" value="Create">
+      </form>
+      <br>
+      <h6><a class="btn btn-danger" href="{% url 'products:detail_bouquet' pk=prev %}">Back</a></h6>
+      <br>
+    </div>
+  </div>
+</div>
 
-<h6 class="invis">.</h6>
-<form class="create_flower" method="post">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  <h6 class="invis">.</h6>
-  <input type="submit" class="btn btn-outline-success" value="Create">
-</form>
-
-<h6 class="invis">.</h6>
-<h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=prev %}">Back</a></h6>
 {% endblock %}

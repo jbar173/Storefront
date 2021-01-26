@@ -3,151 +3,156 @@
 
 {% block content_block %}
 
-<h6 class="invis">.</h6>
-<h5 class="tb_title">Your bouquet:</h5>
-<h6 class="invis">.</h6>
+<div class="container-fluid">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-12 pale-image text-cen">
+      <br><br><br>
+      <h4 class="tb_title">Your bouquet</h4>
+      <br><br><br>
 
-<h6 class="invis">.</h6>
+        {% if object.theme_name %}
 
-{% if object.theme_name %}
+          <div class="container-fluid text-cen cen">
+                <h6>{{object}}</h6>
+                <h6>Theme: By {{object.theme_name}}</h6>
+                <h6>Size: {{object.size}}</h6>
+                <h6>Price: £{{object.price}}</h6>
+          </div>
 
-  <table>
-    <td id="td_detail">
-    <h6>{{object}}</h6>
-    <h6>Theme: By {{object.theme_name}}</h6>
-    <h6>Size: {{object.size}}</h6>
-    <h6>Price: £{{object.price}}</h6>
-    </td>
-  </table>
-
-{% else %}
-
-  <table>
-    <td id="td_detail">
-    <h6>{{object}}</h6>
-    <h6>Style: Random</h6>
-    <h6>Price: £{{object.price}}</h6>
-    </td>
-  </table>
-
-{% endif %}
-
-
-<h6 class="invis">.</h6>
-
-{% if object.theme_name == 'Type' %}
-<h6 class="invis">.</h6>
-  <h6 class="tb_title col-md-3">Your flower types:</h6>
-  <h6 class="invis">.</h6>
-  {% if object.theme.count > 0 %}
-    {% for x in object.theme.all %}
-      {{x.type}}
-      <h6 class="invis">.</h6>
-      <a class="btn btn-outline-danger btn-sm tiny" href="{% url 'themed_products:delete_theme' bouquet_id=object.pk pk=x.pk %}">Delete</a>
-      <h6 class="invis">.</h6>
-      {% endfor %}
-      {% else %}
-      <p>No types yet</p>
-      {% endif %}
-{% else %}
-  <p></p>
-  {% endif %}
-
-{% if object.theme_name == 'Colour' %}
-<h6 class="invis">.</h6>
-  <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
-  <h6 class="invis">.</h6>
-    {% if object.theme.count > 0 %}
-      {% for x in object.theme.all %}
-        {{x.colour}}
-        <h6 class="invis">.</h6>
-        <a class="btn btn-outline-danger btn-sm tiny" href="{% url 'themed_products:delete_theme' bouquet_id=object.pk pk=x.pk %}">Delete</a>
-          <h6 class="invis">.</h6>
-        {% endfor %}
         {% else %}
-        <h6 class="invis">.</h6>
-        <p>No colours yet</p>
+
+        <div class="container-fluid text-cen cen">
+                <h6>{{object}}</h6>
+                <h6>Style: Random</h6>
+                <h6>Price: £{{object.price}}</h6>
+          </div>
+
         {% endif %}
-{% else %}
-  <h6 class="invis">.</h6>
-  {% endif %}
 
+        <br>
 
-{% if object.theme_name == 'Type and Colour' %}
-
-    {% if object.theme.all.count > 0 %}
-    <h6 class="invis">.</h6>
-      <h6 class="tb_title col-md-3">Your flower types:</h6>
-      <h6 class="invis">.</h6>
-          {% for x in object.theme.all %}
-            {% if x.type %}
-              {{x.type}}
-              <h6 class="invis">.</h6>
+        {% if object.theme_name == 'Type' %}
+          <h6 class="tb_title col-md-3">Your flowers:</h6>
+          <br><br><br>
+          {% if object.theme.count > 0 %}
+            {% for x in object.theme.all %}
+              {{x.type|title}}
+              <br><br>
               <a class="btn btn-outline-danger btn-sm tiny" href="{% url 'themed_products:delete_theme' bouquet_id=object.pk pk=x.pk %}">Delete</a>
-            <h6 class="invis">.</h6>
+              <br><br>
+              {% endfor %}
+              {% else %}
+              <p>No types yet</p>
+              <br><br>
               {% endif %}
-            {% endfor %}
+        {% else %}
+          <br><br>
+          {% endif %}
+
+        {% if object.theme_name == 'Colour' %}
+          <h6 class="tb_title col-md-3">Your colours:</h6>
+          <br><br><br>
+            {% if object.theme.count > 0 %}
+              {% for x in object.theme.all %}
+                {{x.colour|title}}
+                <br><br>
+                <a class="btn btn-outline-danger btn-sm tiny" href="{% url 'themed_products:delete_theme' bouquet_id=object.pk pk=x.pk %}">Delete</a>
+                <br><br>
+                {% endfor %}
+                {% else %}
+                <p>No colours yet</p>
+                <br><br>
+                {% endif %}
+        {% else %}
+          <br><br>
+          {% endif %}
 
 
-    {% else %}
-    <h6 class="invis">.</h6>
-    <h6 class="tb_title col-md-3">Your flower types:</h6>
-    <h6 class="invis">.</h6>
-    <p>No flowers yet</p>
-    <h6 class="invis">.</h6>
-    {% endif %}
+        {% if object.theme_name == 'Type and Colour' %}
+
+            {% if object.theme.all.count > 0 %}
+              <h6 class="tb_title col-md-3">Your theme flowers:</h6>
+              <br><br><br>
+                  {% for x in object.theme.all %}
+                    {% if x.type %}
+                      {{x.type|title}}
+                      <br><br>
+                      <a class="btn btn-outline-danger btn-sm tiny" href="{% url 'themed_products:delete_theme' bouquet_id=object.pk pk=x.pk %}">Delete</a>
+                      <br><br>
+                      {% endif %}
+                    {% endfor %}
 
 
-    {% if object.theme.all.count > 0 %}
+            {% else %}
+            <h6 class="tb_title col-md-3">Your theme flowers:</h6>
+            <br><br>
+            <p>No flowers yet</p>
+            {% endif %}
 
-        <h6 class="invis">.</h6>
-        <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
-        <h6 class="invis">.</h6>
-          {% for x in object.theme.all %}
-            {% if x.colour %}
-              {{x.colour}}
-              <h6 class="invis">.</h6>
-              <a class="btn btn-outline-danger btn-sm tiny" href="{% url 'themed_products:delete_theme' bouquet_id=object.pk pk=x.pk %}">Delete</a>
-              <h6 class="invis">.</h6>
+
+            {% if object.theme.all.count > 0 %}
+                <br>
+                <h6 class="tb_title col-md-3">Your theme colours:</h6>
+                <br><br><br>
+                  {% for x in object.theme.all %}
+                    {% if x.colour %}
+                      {{x.colour|title}}
+                      <br><br>
+                      <a class="btn btn-outline-danger btn-sm tiny" href="{% url 'themed_products:delete_theme' bouquet_id=object.pk pk=x.pk %}">Delete</a>
+                      <br><br>
+                      {% endif %}
+                    {% endfor %}
+
+              {% else %}
+                <br><br>
+                <h6 class="tb_title col-md-3">Your theme colours:</h6>
+                <br><br>
+                <p>No colours yet</p>
+                <br><br>
+                {% endif %}
+
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-12 text-cen">
+      <div class="row text-cen cen">
+
+          <div class="col text-cen">
+              <h5><a class="btn btn-outline-danger" href="{% url 'themed_products:delete_tbouquet' pk=object.pk %}">Discard all</a></h5>
+          </div>
+
+          <div class="col text-cen">
+              {% if object.theme_name == 'Type' %}
+              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_type' %}">Add a flower</a></h5>
+
+              {% elif object.theme_name == 'Colour' %}
+              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_colour' %}">Add a colour</a></h5>
+
+              {% elif object.theme_name == 'Type and Colour' %}
+              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_type' %}">Add a flower</a></h5>
+              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_colour' %}">Add a colour</a></h5>
+
+              {% else %}
+              <p></p>
               {% endif %}
-            {% endfor %}
+            </div>
 
-      {% else %}
-      <h6 class="invis">.</h6>
-      <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
-      <h6 class="invis">.</h6>
-      <p>No colours yet</p>
-      <h6 class="invis">.</h6>
-      {% endif %}
+            <div class="col text-cen">
+                {% if user.customer_basket %}
+                  <h5><a class="btn btn-outline-success" href="{% url 'themed_products:update_tbouquet_two' pk=object.pk %}">Save bouquet</a></h5>
+                {% else %}
+                  <h5><a class="btn btn-outline-success" href="{% url 'themed_products:update_tbouquet' pk=object.pk %}">Save bouquet</a></h5>
+                {% endif %}
+            </div>
 
-
-{% endif %}
-
-
-<h6 class="invis">.</h6>
-
-{% if object.theme_name == 'Type' %}
-<h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_type' %}">Add a flower type to your bouquet</a></h5>
-
-{% elif object.theme_name == 'Colour' %}
-<h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_colour' %}">Add a colour to your bouquet</a></h5>
-
-{% elif object.theme_name == 'Type and Colour' %}
-<h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_type' %}">Add a flower type to your bouquet</a></h5>
-<h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_colour' %}">Add a colour to your bouquet</a></h5>
-
-{% else %}
-<p></p>
-{% endif %}
-
-
-  {% if user.customer_basket %}
-    <h5><a class="btn btn-outline-success" href="{% url 'themed_products:update_tbouquet_two' pk=object.pk %}">Save bouquet to basket</a></h5>
-  {% else %}
-    <h5><a class="btn btn-outline-success" href="{% url 'themed_products:update_tbouquet' pk=object.pk %}">Save bouquet to basket</a></h5>
-  {% endif %}
-
-
-<h5><a class="btn btn-outline-danger" href="{% url 'themed_products:delete_tbouquet' pk=object.pk %}">Discard bouquet</a></h5>
-
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
 {% endblock %}

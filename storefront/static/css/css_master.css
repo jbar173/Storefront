@@ -71,6 +71,18 @@
   display: inline;
 }
 
+.txt-white{
+  color: white;
+}
+
+.txt-gr{
+  color: seagreen;
+}
+
+.b-gr{
+  border-color: seagreen;
+}
+
 .invis{
   color: white;
 }
@@ -93,6 +105,22 @@
   align-items: center;
 }
 
+.bl{
+  color: black;
+}
+
+.gr{
+  color: green;
+}
+
+.yl{
+  color: olivedrab;
+}
+
+.blu{
+  color: darkslateblue;
+}
+
 .text-right{
   align-items: right;
 }
@@ -110,16 +138,42 @@
 }
 
 .myborder{
-  border: 4px solid white;
-  padding: 0px 2px 0px 4px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 0px 0px 0px 0px;
 }
 
 .myborder-thick{
-  border: 8px solid white;
-  padding: 10px 0px 0px 0px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 15px 0px 20px 0px;
 }
-
 
 .mybtn:hover{
   border: 1px solid green;
+}
+
+.icons td{
+  height: 20px;
+  width: 40px;
+}
+
+#twitter-box{
+  height: 20px;
+  width: 35px;
+}
+
+
+.pale-image{
+  background-image: url("palebackground.jpg");
+  background-size: cover;
+  border: 5px solid white;
+  border-radius: 10px;
+}
+
+.formimage{
+  background-image: url("designform.jpg");
+  background-size: cover;
+  border: 5px solid white;
+  border-radius: 10px;
 }
