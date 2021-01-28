@@ -3,33 +3,46 @@
 
 {% block content_block %}
 
-{% if user.is_authenticated %}
-  <h6 class="invis">.</h6>
-  <h6 class="invis">.</h6>
-  <form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <input type="submit" class="btn btn-outline-success" value="Add to my basket">
-    <h6 class="invis">.</h6>
-  </form>
 
-    {% if tb %}
-      <h6 class="invis">.</h6>
-      <h6><a class="btn btn-outline-danger" href="{% url 'themed_products:themed_detail' pk=bouq %}">Back to bouquet</a></h6>
-    {% elif r %}
-    <h6 class="invis">.</h6>
-    <h6><a class="btn btn-outline-danger" href="{% url 'products:range' %}">Cancel</a></h6>
-    {% else %}
-      <h6 class="invis">.</h6><h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouq %}">Back to bouquet</a></h6>
-    {% endif %}
+<br><br><br>
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
+        <br><br>
+        {% if user.is_authenticated %}
+          <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" class="btn btn-outline-success" value="Add to my basket">
+            <br>
+          </form>
 
-{% else %}
+            {% if tb %}
+              <br>
+              <h6><a class="btn btn-outline-danger" href="{% url 'themed_products:themed_detail' pk=bouq %}">Back to bouquet</a></h6>
+              <br>
+            {% elif r %}
+            <br>
+            <h6><a class="btn btn-outline-danger" href="{% url 'products:range' %}">Cancel</a></h6>
+            <br>
+            {% else %}
+            <br>
+              <h6 class="invis">.</h6><h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouq %}">Back to bouquet</a></h6>
+              <br>
+            {% endif %}
 
-  <h6 class="invis">.</h6>
-  <h5>Please sign up to save a bouquet to your basket!</h5>
-    <h6 class="invis">.</h6>
-  <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">Sign up</a>
+        {% else %}
 
-{% endif %}
+          <br>
+          <h5>Please sign up to save a bouquet to your basket!</h5>
+            <br>
+          <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">Sign up</a>
+          <br><br><br>
+        {% endif %}
+    </div>
+  </div>
+  <br>
+</div>
+<br>
 
 {% endblock %}

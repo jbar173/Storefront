@@ -2,19 +2,23 @@
 
 {% block content_block %}
 
-  <h6 class="invis">.</h6>
-
-<h5>Are you sure you want to delete your bouquet?</h5>
-  <h6 class="invis">.</h6>
-  <h6 class="invis">.</h6>
-
-<form method="POST">
-  {% csrf_token %}
-  <input type="submit" class="btn btn-outline-success" value="Delete">
-</form>
-
-<h6 class="invis">.</h6>
-<h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouquet.pk %}">Cancel</a></h6>
-
+<br><br>
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
+      <br><br><br>
+      <h5>Are you sure you want to delete your bouquet?</h5>
+      <br><br>
+      <form method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-outline-success" value="Delete">
+      </form>
+      <br>
+      <h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouquet.pk %}">Cancel</a></h6>
+      <br><br>
+    </div>
+  </div>
+  <br>
+</div>
 
 {% endblock %}

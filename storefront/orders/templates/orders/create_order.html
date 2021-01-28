@@ -2,37 +2,42 @@
 
 {% block content_block %}
 
-  <h6 class="invis">.</h6>
-  <h3 class="tb_title">Confirm purchase:</h3>
-  <h6 class="invis">.</h6>
-    <h6 class="invis">.</h6>
-    <h6 class="invis">.</h6>
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-6 col-xs-6 pale-image thumb-border-full">
 
+        <br><br><br>
+        <h3 class="tb_title">Confirm purchase</h3>
+        <br><br>
+        <br><br>
 
-    <h5>Please confirm your details:</h5>
-      <h6 class="invis">.</h6>
-      <h6 class="tb_title">Name:</h6>
-      <h6 class="invis">.</h6>
-      <p>{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
-      <h6 class="invis">.</h6>
-      <h6 class="tb_title">Billing address: </h6>
-      <h6 class="invis">.</h6>
-      <p>{{user.customer_account.billing_address}}</p>
-      <h6 class="invis">.</h6>
-      <h6 class="tb_title">Delivery address: </h6>
-      <h6 class="invis">.</h6>
-      <p>{{user.customer_account.delivery_address}}</p>
+          <h5>Please confirm your details:</h5>
+            <br><br>
+            <h6 class="tb_title">Name:</h6>
+            <br><br>
+            <p>{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
+            <br>
+            <h6 class="tb_title">Billing address: </h6>
+            <br><br>
+            <p>{{user.customer_account.billing_address}}</p>
+            <br>
+            <h6 class="tb_title">Delivery address: </h6>
+            <br><br>
+            <p>{{user.customer_account.delivery_address}}</p>
 
-
-  <h6 class="invis">.</h6>
-  <h6><a class="btn btn-outline-warning" href="{% url 'basket:update_purchase' pk=user.customer_account.pk %}">Edit Details</a></h6>
-
-    <form method="post">
-      {% csrf_token %}
-      {{bouquet_order_form.as_p}}
-      <input class="btn btn-outline-success" type="submit" value="Confirm and place order">
-      <h6 class="invis">.</h6>
-    </form>
+        <br><br>
+        <h6><a class="btn btn-outline-warning" href="{% url 'basket:update_purchase' pk=user.customer_account.pk %}">Edit Details</a></h6>
+          <form method="post">
+            {% csrf_token %}
+            {{bouquet_order_form.as_p}}
+            <input class="btn btn-outline-success" type="submit" value="Confirm and place order">
+            <br>
+          </form>
+        <br>
+    </div>
+  </div>
+  <br>
+</div>
 
 
 {% endblock %}

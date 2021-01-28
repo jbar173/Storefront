@@ -3,14 +3,21 @@
 
 {% block content_block %}
 
-<h6 class="invis">.</h6>
-<form method="post">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  <input type="submit" class="btn btn-outline-success" value="Save to Basket">
-  <h6 class="invis">.</h6>
-</form>
-
-<h5><a class="btn btn-outline-danger" href="{% url 'products:range' %}">Cancel</a></h5>
+<br><br>
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
+        <br><br>
+        <form method="post">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <input type="submit" class="btn btn-outline-success" value="Save to Basket">
+          <br><br>
+        </form>
+        <h5><a class="btn btn-outline-danger" href="{% url 'products:range' %}">Cancel</a></h5>
+        <br>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

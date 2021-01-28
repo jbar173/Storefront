@@ -2,26 +2,31 @@
 
 {% block content_block %}
 
-<h6 class="invis">.</h6>
-<h3 class="tb_title">Your bouquet:</h3>
-  <h6 class="invis">.</h6>
-  <h6 class="invis">.</h6>
-  {% for flower in object.flower.all %}
-    <h6>{{flower}}</h5>
-    <p>£{{flower.price}}</p>
-  {% endfor %}
-  <h6 class="invis">.</h6>
-  <h5>Total: £{{object.price}}</h5>
-  <h6 class="invis">.</h6>
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-6 col-xs-6 pale-image thumb-border-full">
+      <br><br>
+        <h3 class="tb_title">Your bouquet:</h3>
+          <br><br><br>
+          {% for flower in object.flower.all %}
+            <h6>{{flower}}</h5>
+            <p>£{{flower.price}}</p>
+          {% endfor %}
+          <br><br>
+          <h5>Total: £{{object.price}}</h5>
+          <br><br>
 
+        <br>
 
-<h6 class="invis">.</h6>
-<h6 class="invis">.</h6>
+        {% if object.basket %}
+          <a class="btn btn-outline-warning" href="{% url 'basket:basket' %}">Back to basket</a>
+        {% else %}
+        <a class="btn btn-outline-warning" href="{% url 'orders:detail' pk=object.order.pk %}">Back to order</a>
+        {% endif %}
 
-{% if object.basket %}
-  <a class="btn btn-outline-warning" href="{% url 'basket:basket' %}">Back to basket</a>
-{% else %}
-<a class="btn btn-outline-warning" href="{% url 'orders:detail' pk=object.order.pk %}">Back to order</a>
-{% endif %}
+        <br><br>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

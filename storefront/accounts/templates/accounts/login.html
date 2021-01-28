@@ -2,14 +2,25 @@
 {% load bootstrap3 %}
 
 {% block content_block %}
-<h6 class="invis">.</h6>
-  <h3 class="tb_title">Log in here!</h3>
-    <h6 class="invis">.</h6>
-    <h6 class="invis">.</h6>
-  <form class="login-form" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-      <h6 class="invis">.</h6>
-    <input class="btn btn-outline-success" type="submit" value="Log In">
-  </form>
+
+<br>
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
+        <br><br><br>
+          <h3 class="tb_title">Log in here!</h3>
+          <br><br>
+          <br><br>
+          <form class="login-form" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <br><br>
+            <input class="btn btn-outline-success" type="submit" value="Log In">
+          </form>
+       <br><br>
+     </div>
+   </div>
+  <br>
+</div>
+
 {% endblock %}

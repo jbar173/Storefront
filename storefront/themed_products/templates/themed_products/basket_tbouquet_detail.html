@@ -3,84 +3,88 @@
 
 {% block content_block %}
 
-<h6 class="invis">.</h6>
-<h5 class="tb_title">Your bouquet:</h5>
-<h6 class="invis">.</h6>
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-6 col-xs-6 pale-image thumb-border-full">
+        <br><br><br>
+        <h5 class="tb_title">Your bouquet:</h5>
+        <br><br>
+        <br>
 
-<h6 class="invis">.</h6>
+        {% if object.theme_name %}
 
-{% if object.theme_name %}
+            <h6>{{object}}</h6>
+            <h6>Theme: By {{object.theme_name}}</h6>
+            <h6>Size: {{object.size}}</h6>
+            <h6>Price: £{{object.price}}</h6>
 
-    <h6>{{object}}</h6>
-    <h6>Theme: By {{object.theme_name}}</h6>
-    <h6>Size: {{object.size}}</h6>
-    <h6>Price: £{{object.price}}</h6>
+            <br>
 
-     <h6 class="invis">.</h6>
-     <h6 class="invis">.</h6>
+        {% else %}
 
-{% else %}
+            <h6>{{object}}</h6>
+            <h6>Style: Random</h6>
+            <h6>Price: £{{object.price}}</h6>
 
-    <h6>{{object}}</h6>
-    <h6>Style: Random</h6>
-    <h6>Price: £{{object.price}}</h6>
+            <br>
 
+        {% endif %}
 
-   <h6 class="invis">.</h6>
-   <h6 class="invis">.</h6>
+          {% if object.theme_name == 'Type' %}
+          <br>
+            <h6 class="tb_title col-md-3">Your flower types:</h6>
+            <br><br>
+            {% for x in object.theme.all %}
+              {{x.type}}
+              <br><br>
+              {% endfor %}
 
-{% endif %}
+          {% elif object.theme_name == 'Colour' %}
+          <br>
+            <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
+            <br><br>
+            {% for x in object.theme.all %}
+              {{x.colour}}
+              <br><br>
+              {% endfor %}
 
+           {% elif object.theme_name == 'Type and Colour' %}
+           <br>
+           <h6 class="tb_title col-md-3">Your flower types:</h6>
+           <br><br>
+               {% for x in object.theme.all %}
+                 {% if x.type %}
+                   {{x.type}}
+                   <br><br>
+                  {% endif %}
+                {% endfor %}
+            <br><br>
+            <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
+            <br><br>
+            {% for x in object.theme.all %}
+              {% if x.colour %}
+              {{x.colour}}
+              <br><br>
+              {% endif %}
+              {% endfor %}
 
-  {% if object.theme_name == 'Type' %}
-  <h6 class="invis">.</h6>
-    <h6 class="tb_title col-md-3">Your flower types:</h6>
-    <h6 class="invis">.</h6>
-    {% for x in object.theme.all %}
-      {{x.type}}
-      <h6 class="invis">.</h6>
-      {% endfor %}
+            {% else %}
+            <br>
+            {% endif %}
 
-  {% elif object.theme_name == 'Colour' %}
-  <h6 class="invis">.</h6>
-    <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
-    <h6 class="invis">.</h6>
-    {% for x in object.theme.all %}
-      {{x.colour}}
-      <h6 class="invis">.</h6>
-      {% endfor %}
+        <br>
 
-   {% elif object.theme_name == 'Type and Colour' %}
-   <h6 class="tb_title col-md-3">Your flower types:</h6>
-   <h6 class="invis">.</h6>
-       {% for x in object.theme.all %}
-         {% if x.type %}
-           {{x.type}}
-           <h6 class="invis">.</h6>
-          {% endif %}
-        {% endfor %}
-    <h6 class="invis">.</h6>
-    <h6 class="tb_title col-md-3">Your bouquet colours:</h6>
-    <h6 class="invis">.</h6>
-    {% for x in object.theme.all %}
-      {% if x.colour %}
-      {{x.colour}}
-      <h6 class="invis">.</h6>
-      {% endif %}
-      {% endfor %}
+        {% if object.basket %}
+        <a class="btn btn-outline-warning" href="{% url 'basket:basket' %}">Back to basket</a>
+        {% else %}
+        <a class="btn btn-outline-warning" href="{% url 'orders:detail' pk=object.order.pk %}">Back to order</a>
+        {% endif %}
 
-    {% else %}
-    <p></p>
-    {% endif %}
+        <br><br><br>
 
-<h6 class="invis">.</h6>
-
-{% if object.basket %}
-<a class="btn btn-outline-warning" href="{% url 'basket:basket' %}">Back to basket</a>
-{% else %}
-<a class="btn btn-outline-warning" href="{% url 'orders:detail' pk=object.order.pk %}">Back to order</a>
-{% endif %}
-
-<h6 class="invis">.</h6>
+    </div>
+  </div>
+</div>
+<br>
 
 {% endblock %}

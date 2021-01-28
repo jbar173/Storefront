@@ -7,54 +7,68 @@
 
 {% block notification %}{% endblock %}
 
-<div class="container-fluid">
+<div class="container pale-image thumb-border-full acc">
+  <div class="row text-cen cen">
+    <br><br><br>
+    <h3 class="tb_title">{{account.user.username}}'s Account Details</h3>
+    <br><br>
+    <br><br>
+    <div class="col-lg-3 col-sm-6 col-xs-6">
+      <h6 class="tb_title">Name:</h6>
+      <br><br>
+      <p>{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
+      <br>
+    </div>
+    <div class="col-lg-3 col-sm-6 col-xs-6">
+      <h6 class="tb_title">Billing address: </h6>
+      <br><br>
+      <p>{{user.customer_account.billing_address}}</p>
+      <br>
+      <h6 class="tb_title">Delivery address: </h6>
+      <br><br>
+      <p>{{user.customer_account.delivery_address}}</p>
+      <br>
+    </div>
 
-  <h6 class="invis">.</h6>
-  <h3 class="tb_title">{{account.user.username}}'s Account Details!</h3>
-  <h6 class="invis">.</h6>
-  <h6 class="invis">.</h6>
-  <h6 class="invis">.</h6>
-
-  <h6 class="tb_title">Name:</h6>
-  <h6 class="invis">.</h6>
-  <p>{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
-  <h6 class="invis">.</h6>
-  <h6 class="tb_title">Billing address: </h6>
-  <h6 class="invis">.</h6>
-  <p>{{user.customer_account.billing_address}}</p>
-  <h6 class="invis">.</h6>
-  <h6 class="tb_title">Delivery address: </h6>
-  <h6 class="invis">.</h6>
-  <p>{{user.customer_account.delivery_address}}</p>
-
-<h6 class="invis">.</h6>
-  <div class="edit-details">
-  <a href="{% url 'accounts:edit' pk=user.customer_account.pk %}"
-    title="Edit" class="btn btn-outline-warning">Edit Details</a>
-</div>
-<h6 class="invis">.</h6>
-<h6 class="invis">.</h6>
-<h6 class="invis">.</h6>
-
-  <h5 class="tb_title">Previous orders:</h5>
-    <h6 class="invis">.</h6>
-    <h6 class="invis">.</h6>
-
-<div class="container">
-
-  {% for x in customer_orders %}
-      {{x}}
-      <h6 class="invis">.</h6>
-      <a href="{% url 'orders:detail' pk=x.pk %}"
-       class="btn btn-sm btn-outline-success">Details</a>
-       <h6 class="invis">.</h6>
-       <h6 class="invis">.</h6>
-      {% endfor %}
   </div>
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-12">
+      <div class="edit-details">
+      <a href="{% url 'accounts:edit' pk=user.customer_account.pk %}"
+        title="Edit" class="btn btn-outline-warning">Edit Details</a>
+      </div>
+        <br><br>
+      <h4 class="tb_title">Previous orders</h4>
+      <br><br><br>
+      {% if customer_orders %}
+      <div class="container text-cen cen">
+        <table class="text-cen cen orders" id="order-table">
+          {% for x in customer_orders %}
+            <tr class="text-cen cen">
+              <td class="text-cen cen new-border-l">
+                <h6>{{x}}</h6>
+              </td>
+              <td class="text-cen cen">
+                <a href="{% url 'orders:detail' pk=x.pk %}"
+                 class="btn btn-sm btn-outline-success">Details</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <h6>No previous orders</h6>
+        <br>
+      </div>
+      {% endif %}
 
-{% else %}
+    {% else %}
 
-<h3>Page error</h3>
-{% endif %}
+    <h3>Page error</h3>
+    {% endif %}
+    <br><br>
+    </div>
+  </div>
+  <br>
+</div>
 
 {% endblock %}

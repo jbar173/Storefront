@@ -3,19 +3,27 @@
 
 {% block content_block %}
 
-<h6 class="invis">.</h6>
-<h4>Let us design a bouquet for you!</h4>
-<h6 class="invis">.</h6>
-<form method="post">
-  {% csrf_token %}
-    <h5>How much would you like to spend?</h5>
-      <h6 class="invis">.</h6>
-  {% bootstrap_form form %}
-  <h6 class="invis">.</h6>
-  <input type="submit" class="btn btn-outline-success" value="Save">
-  <h6 class="invis">.</h6>
-</form>
-
-<h6><a class="btn btn-outline-danger" href="{% url 'products:shop' %}">Cancel</a></h6>
-
+<div class="container">
+  <div class="row text-cen cen">
+    <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
+        <br><br><br>
+          <h3>Let us design a bouquet for you!</h3>
+          <br><br>
+          <form method="post">
+            {% csrf_token %}
+              <h5>How much would you like to spend?</h5>
+                <br>
+            {% bootstrap_form form %}
+            <br>
+            <input type="submit" class="btn btn-outline-success" value="Save">
+            <br>
+          </form>
+          <br>
+          <h6><a class="btn btn-outline-danger" href="{% url 'products:shop' %}">Cancel</a></h6>
+        <br>
+        
+    </div>
+  </div>
+</div>
+<br>
 {% endblock %}

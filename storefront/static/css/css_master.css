@@ -56,8 +56,12 @@
 .tb_title_sm{
   border: 1px solid pink;
   border-radius: 6px;
-  padding: 14px 8px 14px 8px;
+  padding: 18px 8px 14px 8px;
   display: inline;
+}
+
+.no-bottom{
+  border-bottom: white;
 }
 
 .cen{
@@ -137,14 +141,22 @@
   border-radius: 18px;
 }
 
+.thumb-border-rng{
+  border: 1px solid lightgrey;
+  border-left: white;
+  border-top: white;
+  border-radius: 18px;
+  padding-bottom: 30px;
+}
+
 .myborder{
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
   border-radius: 10px;
   padding: 0px 0px 0px 0px;
 }
 
 .myborder-thick{
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
   border-radius: 10px;
   padding: 15px 0px 20px 0px;
 }
@@ -163,7 +175,6 @@
   width: 35px;
 }
 
-
 .pale-image{
   background-image: url("palebackground.jpg");
   background-size: cover;
@@ -176,4 +187,14 @@
   background-size: cover;
   border: 5px solid white;
   border-radius: 10px;
+}
+
+.orders{
+  display: inline;
+}
+
+.orders td{
+  height: 75px;
+  width: 200px;
+  border: 3px dashed lightgrey;
 }

@@ -3,75 +3,67 @@
 
 <div class="container">
   <div class="row text-cen cen">
-    <div class="col-lg-6 col-sm-6 col-xs-6 thumb-border-full">
+    <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
 
-        <h6 class="invis">.</h6>
+        <br><br>
         <h3 class="tb_title_b">{{user.customer_basket}}</h3>
-            <h6 class="invis">.</h6>
-
+          <br><br>
 
           {% if b %}
-              <h6 class="invis">.</h6>
               {% for x in b %}
                 <h6>{{x}}</h6>
                 <p>£{{x.price}}</p>
                 <a class="btn btn-outline-success btn-sm" href="{% url 'products:basket_bouquet' pk=x.pk %}">Details</a>
                   <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_bouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
-                  <h6 class="invis">.</h6>
+                  <br><br>
               {% endfor %}
           {% endif %}
 
-
           {% if tb %}
-            <h6 class="invis">.</h6>
               {% for x in tb %}
                 <h6>{{x}}</h6>
                 <p>£{{x.price}}</p>
                 <a class="btn btn-outline-success btn-sm" href="{% url 'themed_products:basket_tbouquet' pk=x.pk %}">Details</a>
                   <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_tbouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
-                  <h6 class="invis">.</h6>
+                  <br><br>
               {% endfor %}
           {% endif %}
 
-
           {% if r %}
-            <h6 class="invis">.</h6>
               {% for x in r %}
                 <h6>{{x|title}} bouquet</h6>
                 <p>£{{x.price}}</p>
                 <a class="btn btn-outline-success btn-sm" href="{% url 'range_products:r_bouquet_detail' pk=x.pk %}">Details</a>
                   <a class="btn btn-outline-danger btn-sm" href="{% url 'basket:delete_rbouquet' basket_id=user.customer_basket.pk pk=x.pk %}">Delete</a>
-                  <h6 class="invis">.</h6>
+                  <br><br>
               {% endfor %}
-              <h6 class="invis">.</h6>
           {% endif %}
 
-
           {% if b or tb or r %}
-          <h6 class="invis">.</h6>
+          <br><br>
             <h5>Total: £{{total}}</h5>
-                <h6 class="invis">.</h6>
+                <br><br>
             <form method="post">
               {% csrf_token %}
               {{form.as_p}}
               <input class="btn btn-outline-success" type="submit" value="Go to Checkout">
             </form>
-            <h6 class="invis">.</h6>
+            <br>
+            <a class="btn btn-outline-warning" href="{% url 'products:shop' %}">Continue shopping</a>
+            <br><br>
           {% else %}
-            <h6 class="invis">.</h6>
+            <br><br>
             <h5>Your basket is empty.</h5>
-            <h6 class="invis">.</h6>
+            <br><br>
           {% endif %}
 
-
-    {% else %}
+      {% else %}
 
       <h6>Please sign up to place an order with us:</h6>
-      <h6 class="invis">.</h6>
+      <br><br>
       <a class="btn btn-outline-success" href="{% url 'accounts:signup' %}">Sign up</a>
-
     {% endif %}
-
-        </div>
     </div>
+  </div>
+  <br>
 </div>

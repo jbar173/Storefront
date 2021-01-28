@@ -1,6 +1,8 @@
-{% extends "site_base.html" %}
+{% extends "home.html" %}
 
-{% block content_block %}
-  <h3>You are now logged out</h3>
-  <h2>Thanks for visiting us today, come back soon!</h2>
+{% block logout_notification %}
+<div class="container">
+  <h5>You are now logged out.</h5>
+  <h4>Thanks for visiting us today, come back soon!</h4>
+</div>
 {% endblock %}

@@ -3,9 +3,7 @@
 
 {% block content_block %}
 
-
-<h6 class="invis">.</h6>
-<h6 class="invis">.</h6>
+<br>
 
 <div class="container">
   {% for x in object_list %}
@@ -21,23 +19,24 @@
           <a class="btn btn-outline-success btn-sm cen text-cen"
           href="{% url 'range_products:create_two' slug=x.r_bouquet.slug range_name=x.name %}">
           Add to basket</a>
-          <h6 class="invis">.</h6>
+          <br><br>
           {% else %}
           <a class="btn btn-outline-success btn-sm cen text-cen"
           href="{% url 'range_products:create_one' slug=x.r_bouquet.slug range_name=x.name %}">
           Add to basket</a>
-          <h6 class="invis">.</h6>
+          <br><br>
           {% endif %}
       </div>
     </div>
     {% endfor %}
 </div>
-<h6 class="invis">.</h6>
-<h6 class="invis">.</h6>
 
-<a class="btn btn-outline-danger" href="{% url 'products:range' %}">Back</a>
+<br><br>
 
-<h6 class="invis">.</h6>
-<h6 class="invis">.</h6>
+<div class="cen text-cen">
+    <a class="btn btn-outline-danger" href="{% url 'products:range' %}">Back</a>
+</div>
+
+<br><br><br>
 
 {% endblock %}
