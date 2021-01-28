@@ -1,8 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from . import models
 
-### Tailoring the AUTH form for the AUTH User model :
+
 class CreateCustomerForm(UserCreationForm):
 
     class Meta:

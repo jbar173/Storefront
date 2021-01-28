@@ -12,7 +12,6 @@ import re
 
 # Create your views here.
 
-
 class FlowerCreate(CreateView):
     model = models.Flower
     form_class = forms.CreateFlowerForm

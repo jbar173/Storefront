@@ -4,14 +4,11 @@ from django.conf import settings
 from django.contrib import auth
 from decimal import Decimal
 
-from accounts.models import Account
-
 from django import template
 register = template.Library()
 
 
 # Create your models here.
-
 
 class Basket(models.Model):
 

@@ -8,7 +8,6 @@ urlpatterns = [
 
     url(r'^main/$',RandomCreateThemedBouquet.as_view(),name="shop"),
     url(r'^range/$',views.RangeHome.as_view(),name='range'),
-
     url(r'^tailor/$',views.create_bouquet,name='tailor'),
     url(r'^(?P<bouquet_id>\d+)/create/single/$',views.FlowerCreate.as_view(),name="create_single"),
     url(r'^(?P<pk>\d+)/(?P<bouquet_id>\d+)/delete/single/$',views.FlowerDelete.as_view(),name="delete_flower"),

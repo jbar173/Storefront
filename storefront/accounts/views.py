@@ -3,14 +3,10 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import SelectRelatedMixin
 from django.views.generic import (CreateView, UpdateView,
-                                ListView, DetailView,
-                                TemplateView,)
+                                DetailView,)
 from . import forms
 from . import models
 from orders.models import Order
-from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import redirect
-from django.http import Http404
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -39,7 +35,8 @@ class DisplayDetails(DetailView,SelectRelatedMixin):
     def get_context_data(self,*args,**kwargs):
         context = super(DisplayDetails,self).get_context_data(*args,**kwargs)
         q = Order.objects.filter(account=self.request.user.customer_account)
-        context['customer_orders'] = q
+        r = [x for x in q if x.final == True]
+        context['customer_orders'] = r
         return context
 
 class EditAccount(LoginRequiredMixin,UpdateView):

@@ -16,8 +16,6 @@ class CreateFlowerForm(ModelForm):
         super().__init__(*args,**kwargs)
         self.fields['type'].label = 'Choose a flower:'
         self.fields['colour'].label = 'Choose a colour:'
-        self.fields['type'].widget.attrs['placeholder'] = 'Choose a flower:'
-        self.fields['colour'].widget.attrs['placeholder'] = 'Choose a colour:'
 
 
 class CreateBouquetForm(ModelForm):

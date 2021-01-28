@@ -1,16 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import (CreateView, DetailView,
-                                TemplateView, UpdateView,
-                                DeleteView,)
+                                UpdateView, DeleteView,)
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import redirect
-
 from .models import (Theme,ThemedBouquet,
                     Size,)
-from products.models import (Type, Colour,)
-from . import forms
+from products.models import (Type,Colour,)
 from basket.models import Basket
-
+from . import forms
 import re
 
 

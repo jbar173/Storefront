@@ -1,6 +1,5 @@
 from django import forms
 from . import models
-from products.models import Bouquet
 from django.forms import ModelForm
 from django.forms.widgets import HiddenInput
 

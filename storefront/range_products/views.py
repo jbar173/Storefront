@@ -7,9 +7,7 @@ from django.views.generic import (CreateView, ListView,
 
 # Create your views here.
 
-
 ### Doesn't have a basket:
-
 class CreateRangeBouquet(CreateView):
     model = RangeBouquet
     template_name = 'range_products/create_range_bouquet.html'
@@ -51,7 +49,6 @@ class UpdateRangeBouquet(UpdateView):
         self.object.basket = self.request.user.customer_basket
         self.object.save()
         return super().form_valid(form)
-
 
 
 ### Already has a basket:
