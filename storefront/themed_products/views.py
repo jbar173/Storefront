@@ -52,24 +52,24 @@ class BasketThemedBouquetDetail(DetailView):
     template_name = 'themed_products/basket_tbouquet_detail.html'
 
 
+#########################################
+
+
 class CreateTypeTheme(CreateView):
     model = Type
     form_class = forms.CreateTypeThemeForm
     template_name = 'themed_products/update_theme.html'
 
-    def get_initial(self):
+    def get_initial(self,**kwargs):
         initial = super().get_initial()
-        b1 = self.request.META.get('HTTP_REFERER')
-        b2 = re.findall(r'/\d+',b1)[-1]
-        b3 = re.findall(r'\d+',b2)[0]
+        b3 = self.kwargs['b_id']
+        print(f"b3: {b3}")
         initial['b_id_num'] = b3
         return initial
 
-    def get_context_data(self):
+    def get_context_data(self,**kwargs):
         context = super().get_context_data()
-        b1 = self.request.META.get('HTTP_REFERER')
-        b2 = re.findall(r'/\d+',b1)[-1]
-        b3 = re.findall(r'\d+',b2)[0]
+        b3 = self.kwargs['b_id']
         context['bouq'] = b3
         return context
 
@@ -90,19 +90,15 @@ class CreateColourTheme(CreateView):
     form_class = forms.CreateColourThemeForm
     template_name = 'themed_products/update_theme.html'
 
-    def get_initial(self):
+    def get_initial(self,**kwargs):
         initial = super().get_initial()
-        b1 = self.request.META.get('HTTP_REFERER')
-        b2 = re.findall(r'/\d+',b1)[-1]
-        b3 = re.findall(r'\d+',b2)[0]
+        b3 = self.kwargs['b_id']
         initial['b_id_num'] = b3
         return initial
 
-    def get_context_data(self):
+    def get_context_data(self,**kwargs):
         context = super().get_context_data()
-        b1 = self.request.META.get('HTTP_REFERER')
-        b2 = re.findall(r'/\d+',b1)[-1]
-        b3 = re.findall(r'\d+',b2)[0]
+        b3 = self.kwargs['b_id']
         context['bouq'] = b3
         return context
 
@@ -116,6 +112,10 @@ class CreateColourTheme(CreateView):
         self.object.t_bouquet = ThemedBouquet.objects.get(id__iexact=x)
         self.object.save()
         return super().form_valid(form)
+
+
+###################################################
+
 
 
 class DeleteTheme(DeleteView):

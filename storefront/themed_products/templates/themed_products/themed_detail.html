@@ -128,14 +128,14 @@
 
           <div class="col text-cen">
               {% if object.theme_name == 'Type' %}
-              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_type' %}">Add a flower</a></h5>
+              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_type' b_id=object.pk %}">Add a flower</a></h5>
 
               {% elif object.theme_name == 'Colour' %}
-              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_colour' %}">Add a colour</a></h5>
+              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_colour' b_id=object.pk %}">Add a colour</a></h5>
 
               {% elif object.theme_name == 'Type and Colour' %}
-              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_type' %}">Add a flower</a></h5>
-              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_colour' %}">Add a colour</a></h5>
+              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_type' b_id=object.pk %}">Add a flower</a></h5>
+              <h5><a class="btn btn-outline-warning" href="{% url 'themed_products:update_colour' b_id=object.pk %}">Add a colour</a></h5>
 
               {% else %}
               <p></p>
