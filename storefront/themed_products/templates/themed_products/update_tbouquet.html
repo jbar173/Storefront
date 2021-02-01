@@ -1,5 +1,4 @@
 {% extends 'site_base.html' %}
-{% load bootstrap3 %}
 
 {% block content_block %}
 
@@ -10,19 +9,27 @@
     <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
         <br><br>
 
+        {% if user.is_authenticated %}
         <form method="post">
           {% csrf_token %}
-          {% bootstrap_form form %}
-          <input type="submit" class="btn btn-outline-success" value="Save to Basket">
+          {{update_form_t.as_p}}
+          <input type="submit" class="btn btn-outline-success" value="Add to Basket">
           <br><br>
         </form>
 
-        <h6><a class="btn btn-outline-danger" href="{% url 'themed_products:themed_detail' pk=object.pk %}">Back to bouquet</a></h6>
+        <h6><a class="btn btn-outline-danger" href="{% url 'themed_products:themed_detail' pk=object_pk %}">Back to bouquet</a></h6>
         <br><br>
+
+        {% else %}
+        <h5>Please sign up to save your bouquet!</h5>
+        <br>
+        <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">Sign Up</a>
+        <br><br>
+        <h6><a class="btn btn-outline-danger" href="{% url 'themed_products:themed_detail' pk=object_pk %}">Back to bouquet</a></h6>
+        <br><br>
+        {% endif %}
     </div>
   </div>
 </div>
-
-
 
 {% endblock %}

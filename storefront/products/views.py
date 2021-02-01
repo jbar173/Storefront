@@ -1,12 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import (CreateView, DetailView,
                                 TemplateView, UpdateView,
                                 DeleteView,)
 from . import models
 from . import forms
+from basket.models import Basket
 from .models import Type
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
 import re
 
 
@@ -72,7 +72,6 @@ def create_bouquet(request):
     return render(request,'products/tailor_home.html',{'bouquet_form': new_bouquet})
 
 
-
 class BouquetDetail(DetailView):
     model = models.Bouquet
     template_name = 'products/tailor_flower.html'
@@ -86,42 +85,30 @@ class BouquetDetail(DetailView):
         return context
 
 
-### Update (condition: user doesn't have basket):
-class UpdateBouquet(UpdateView):
-    model = models.Bouquet
-    form_class = forms.UpdateBouquetForm
-    template_name = 'products/update_bouquet.html'
+def update_bouquet(request,pk):
+    bpk = pk
+    object = models.Bouquet.objects.get(id=bpk)
+    update_form = forms.UpdateBouquetForm()
+    update_form.instance = object
 
-    def get_success_url(self):
-        success_url = reverse_lazy('basket:create_basket', kwargs={'b_model':'b','pk':self.object.pk})
-        return success_url
+    if request.method == "POST":
+        update_form = forms.UpdateBouquetForm(request.POST)
 
-    def form_valid(self,form):
-        self.object = form.save(commit=False)
-        result = 0
-        for flower in self.object.flower.all():
-            result += flower.price
-        self.object.price = result
-        self.object.save()
-        return super().form_valid(form)
+        if update_form.is_valid():
+            result = 0
+            for flower in object.flower.all():
+                result += flower.price
+            object.price = result
+            x = Basket.objects.get_or_create(user=request.user)[0]
+            x.save()
+            object.basket = x
+            object.save()
+            print("Bouquet updated")
+            return redirect('basket:basket')
+        else:
+            print("Error - form invalid")
 
-
-### Update (condition: user already has basket):
-class UpdateBouquetTwo(UpdateView):
-    model = models.Bouquet
-    form_class = forms.UpdateBouquetForm
-    template_name = 'products/update_bouquet.html'
-    success_url = reverse_lazy('basket:basket')
-
-    def form_valid(self,form):
-        self.object = form.save(commit=False)
-        result = 0
-        for flower in self.object.flower.all():
-            result += flower.price
-        self.object.price = result
-        self.object.basket = self.request.user.customer_basket
-        self.object.save()
-        return super().form_valid(form)
+    return render(request,'products/update_bouquet.html', {'update_form': update_form,'bouquet_pk':pk})
 
 
 class DeleteBouquet(DeleteView):
@@ -135,9 +122,6 @@ class BasketBouquetDetail(DetailView):
     template_name = 'products/basket_bouquet_detail.html'
 
 
-########
-
-
 class ShopMain(TemplateView):
     template_name = 'products/shop_main.html'
 
@@ -146,4 +130,44 @@ class RangeHome(TemplateView):
     template_name = 'products/range_home.html'
 
 
-########
+### Update (condition: user doesn't have basket):
+
+# class UpdateBouquet(UpdateView):
+#     model = models.Bouquet
+#     form_class = forms.UpdateBouquetForm
+#     template_name = 'products/update_bouquet.html'
+#
+#     def get_success_url(self):
+#         success_url = reverse_lazy('basket:create_basket', kwargs={'b_model':'b','pk':self.object.pk})
+#         return success_url
+#
+#     def form_valid(self,form):
+#         self.object = form.save(commit=False)
+#         result = 0
+#         for flower in self.object.flower.all():
+#             result += flower.price
+#         self.object.price = result
+#         self.object.save()
+#         return super().form_valid(form)
+
+#####################
+
+
+### Update (condition: user already has basket):
+# class UpdateBouquetTwo(UpdateView):
+#     model = models.Bouquet
+#     form_class = forms.UpdateBouquetForm
+#     template_name = 'products/update_bouquet.html'
+#     success_url = reverse_lazy('basket:basket')
+#
+#     def form_valid(self,form):
+#         self.object = form.save(commit=False)
+#         result = 0
+#         for flower in self.object.flower.all():
+#             result += flower.price
+#         self.object.price = result
+#         self.object.basket = self.request.user.customer_basket
+#         self.object.save()
+#         return super().form_valid(form)
+
+######################

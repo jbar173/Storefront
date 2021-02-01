@@ -19,9 +19,9 @@
         <br>
 
         {% if object.basket %}
-          <a class="btn btn-outline-warning" href="{% url 'basket:basket' %}">Back to basket</a>
+          <a class="btn btn-outline-primary" href="{% url 'basket:basket' %}">Back to basket</a>
         {% else %}
-        <a class="btn btn-outline-warning" href="{% url 'orders:detail' pk=object.order.pk %}">Back to order</a>
+        <a class="btn btn-outline-primary" href="{% url 'orders:detail' pk=object.order.pk %}">Back to order</a>
         {% endif %}
 
         <br><br>

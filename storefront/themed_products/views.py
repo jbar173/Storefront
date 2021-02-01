@@ -1,8 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import (CreateView, DetailView,
                                 UpdateView, DeleteView,)
 from django.urls import reverse_lazy, reverse
-from django.shortcuts import redirect
 from .models import (Theme,ThemedBouquet,
                     Size,)
 from products.models import (Type,Colour,)
@@ -50,9 +49,6 @@ class ThemedBouquetDetail(DetailView):
 class BasketThemedBouquetDetail(DetailView):
     model = ThemedBouquet
     template_name = 'themed_products/basket_tbouquet_detail.html'
-
-
-#########################################
 
 
 class CreateTypeTheme(CreateView):
@@ -114,10 +110,6 @@ class CreateColourTheme(CreateView):
         return super().form_valid(form)
 
 
-###################################################
-
-
-
 class DeleteTheme(DeleteView):
     model = Theme
     template_name = 'themed_products/delete_theme.html'
@@ -144,26 +136,53 @@ class DeleteThemedBouquet(DeleteView):
     success_url = reverse_lazy('products:shop')
 
 
-### Update (condition: user doesn't have basket):
-class UpdateTBouquet(UpdateView):
-    model = ThemedBouquet
-    form_class = forms.UpdateTBouquetForm
-    template_name = 'themed_products/update_tbouquet.html'
+def update_themed_bouquet(request,pk):
+    bpk = pk
+    object = ThemedBouquet.objects.get(id=bpk)
+    update_form_t = forms.UpdateTBouquetForm()
+    update_form_t.instance = object
 
-    def get_success_url(self):
-        success_url = reverse_lazy('basket:create_basket', kwargs={'b_model':'tb','pk':self.object.pk})
-        return success_url
+    if request.method == "POST":
+        update_form_t = forms.UpdateTBouquetForm(request.POST)
+
+        if update_form_t.is_valid():
+            x = Basket.objects.get_or_create(user=request.user)[0]
+            x.save()
+            object.basket = x
+            object.save()
+            print("Tbouquet updated")
+            return redirect('basket:basket')
+        else:
+            print("Error - form invalid")
+
+    return render(request,'themed_products/update_tbouquet.html', {'update_form_t': update_form_t,'object_pk':pk})
+
+
+
+
+
+### Update (condition: user doesn't have basket):
+
+# class UpdateTBouquet(UpdateView):
+#     model = ThemedBouquet
+#     form_class = forms.UpdateTBouquetForm
+#     template_name = 'themed_products/update_tbouquet.html'
+#
+#     def get_success_url(self):
+#         success_url = reverse_lazy('basket:create_basket', kwargs={'b_model':'tb','pk':self.object.pk})
+#         return success_url
 
 
 ### Update (condition: user already has basket):
-class UpdateTBouquetTwo(UpdateView):
-    model = ThemedBouquet
-    form_class = forms.UpdateTBouquetForm
-    template_name = 'themed_products/update_tbouquet.html'
-    success_url = reverse_lazy('basket:basket')
 
-    def form_valid(self,form):
-        self.object = form.save(commit=False)
-        self.object.basket = self.request.user.customer_basket
-        self.object.save()
-        return super().form_valid(form)
+# class UpdateTBouquetTwo(UpdateView):
+#     model = ThemedBouquet
+#     form_class = forms.UpdateTBouquetForm
+#     template_name = 'themed_products/update_tbouquet.html'
+#     success_url = reverse_lazy('basket:basket')
+#
+#     def form_valid(self,form):
+#         self.object = form.save(commit=False)
+#         self.object.basket = self.request.user.customer_basket
+#         self.object.save()
+#         return super().form_valid(form)

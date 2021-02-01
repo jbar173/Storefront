@@ -26,7 +26,7 @@
             <p>{{user.customer_account.delivery_address}}</p>
 
         <br><br>
-        <h6><a class="btn btn-outline-warning" href="{% url 'basket:update_purchase' pk=user.customer_account.pk %}">Edit Details</a></h6>
+        <h6><a class="btn btn-outline-primary" href="{% url 'basket:update_purchase' pk=user.customer_account.pk %}">Edit Details</a></h6>
           <form method="post">
             {% csrf_token %}
             {{bouquet_order_form.as_p}}

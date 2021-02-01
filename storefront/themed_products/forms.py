@@ -15,7 +15,7 @@ class CreateThemedBouquetForm(ModelForm):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-
+        self.fields['size'].label = 'Select your bouquet size:'
 
 
 class CreateTypeThemeForm(ModelForm):
@@ -29,8 +29,7 @@ class CreateTypeThemeForm(ModelForm):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.fields['type'].label = 'New flower type:'
-
+        self.fields['type'].label = 'Select a new flower type:'
 
 
 class CreateColourThemeForm(ModelForm):
@@ -44,7 +43,7 @@ class CreateColourThemeForm(ModelForm):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.fields['colour'].label = 'New colour:'
+        self.fields['colour'].label = 'Select a new colour:'
 
 
 

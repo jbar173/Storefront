@@ -3,20 +3,29 @@
 
 {% block content_block %}
 
-
 <br><br>
 <div class="container">
   <div class="row text-cen cen">
     <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
         <br><br>
+      {% if user.is_authenticated %}
         <form method="post">
           {% csrf_token %}
-          {% bootstrap_form form %}
-          <input type="submit" class="btn btn-outline-success" value="Save bouquet">
+          {{update_form.as_p}}
+          <input type="submit" class="btn btn-outline-success" value="Add to Basket">
         </form>
         <br>
-        <h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouquet.pk %}">Back to bouquet</a></h6>
+        <h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouquet_pk %}">Back to bouquet</a></h6>
         <br><br>
+      {% else %}
+      <h5>Please sign up to save your bouquet!</h5>
+      <br>
+      <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">Sign Up</a>
+      <br><br>
+      <h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouquet_pk %}">Back to bouquet</a></h6>
+      <br><br>
+      {% endif %}
+      
       </div>
     </div>
   </div>

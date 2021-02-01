@@ -46,15 +46,17 @@
           <h6 class="text-cen cen"><a class="btn btn-outline-danger" href="{% url 'products:delete_bouquet' pk=bouquet.pk %}">Discard all</a></h6>
             </div>
           <div class="col text-cen">
-          <h6 class="text-cen cen"> <a class="btn btn-outline-warning" href="{% url 'products:create_single' bouquet_id=bouquet.pk %}">Add a flower</a></h6>
+          <h6 class="text-cen cen"> <a class="btn btn-outline-primary" href="{% url 'products:create_single' bouquet_id=bouquet.pk %}">Add a flower</a></h6>
             </div>
+
           <div class="col text-cen">
             {% if user.customer_basket %}
-            <h6 class="text-cen cen"><a class="btn btn-outline-success" href="{% url 'products:update_bouquet_two' pk=bouquet.pk %}">Save bouquet</a></h6>
+            <h6 class="text-cen cen"><a class="btn btn-outline-success" href="{% url 'products:update_bouquet_new' pk=bouquet.pk %}">Save bouquet</a></h6>
             {% else %}
-            <h6 class="text-cen cen"><a class="btn btn-outline-success" href="{% url 'products:update_bouquet' pk=bouquet.pk %}">Save bouquet</a></h6>
+            <h6 class="text-cen cen"><a class="btn btn-outline-success" href="{% url 'products:update_bouquet_new' pk=bouquet.pk %}">Save bouquet</a></h6>
             {% endif %}
               </div>
+
       </div>
     </div>
   </div>

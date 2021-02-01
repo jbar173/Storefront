@@ -15,17 +15,11 @@
         <h5 class='cen'>{{x.r_bouquet|title}}</h5>
         <p class='cen'>£{{x.r_bouquet.price|title}}</p>
 
-          {% if user.customer_basket %}
-          <a class="btn btn-outline-success btn-sm cen text-cen"
-          href="{% url 'range_products:create_two' slug=x.r_bouquet.slug range_name=x.name %}">
-          Add to basket</a>
-          <br><br>
-          {% else %}
           <a class="btn btn-outline-success btn-sm cen text-cen"
           href="{% url 'range_products:create_one' slug=x.r_bouquet.slug range_name=x.name %}">
           Add to basket</a>
           <br><br>
-          {% endif %}
+
       </div>
     </div>
     {% endfor %}
