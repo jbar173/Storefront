@@ -18,6 +18,7 @@ User = get_user_model()
 
 # Create your views here.
 
+
 class BasketDetail(DetailView):
     model = Basket
     template_name = "basket/basket_detail.html"
@@ -29,10 +30,7 @@ class BasketMain(CreateView):
     fields = ()
 
     def get_success_url(self,**kwargs):
-        if self.request.user.customer_account:
-            success_url = reverse_lazy('basket:purchase_final')
-        else:
-            success_url = reverse_lazy('basket:purchase')
+        success_url = reverse_lazy('basket:purchase_final')
         return success_url
 
     def form_valid(self,form):

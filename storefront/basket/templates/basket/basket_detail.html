@@ -43,14 +43,25 @@
           <br><br>
             <h5>Total: £{{total}}</h5>
                 <br><br>
-            <form method="post">
-              {% csrf_token %}
-              {{form.as_p}}
-              <input class="btn btn-outline-success" type="submit" value="Go to Checkout">
-            </form>
-            <br>
-            <a class="btn btn-outline-primary" href="{% url 'products:shop' %}">Continue shopping</a>
-            <br><br>
+
+              {% if user.customer_account %}
+                <form method="post">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <input class="btn btn-outline-success" type="submit" value="Go to Checkout">
+                </form>
+                <br>
+                <a class="btn btn-outline-primary" href="{% url 'products:shop' %}">Continue shopping</a>
+                <br><br>
+
+                {% else %}
+                <a class="btn btn-outline-success" href="{% url 'basket:purchase' %}">Enter Delivery details and Checkout</a>
+                <br><br>
+                <br>
+                <a class="btn btn-outline-primary" href="{% url 'products:shop' %}">Continue shopping</a>
+                <br><br>
+                {% endif %}
+
           {% else %}
             <br><br>
             <h5>Your basket is empty.</h5>

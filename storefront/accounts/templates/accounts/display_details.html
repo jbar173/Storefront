@@ -9,21 +9,23 @@
 
 <div class="container pale-image thumb-border-full acc">
   <div class="row text-cen cen">
-    <br><br><br>
     <h3 class="tb_title">{{account.user.username}}'s Account Details</h3>
     <br><br>
     <br><br>
-    <div class="col-lg-3 col-sm-6 col-xs-6">
+    <br><br><br>
+    <div class="col-lg-4 col-sm-4 col-xs-6">
       <h6 class="tb_title">Name:</h6>
       <br><br>
       <p>{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
       <br>
     </div>
-    <div class="col-lg-3 col-sm-6 col-xs-6">
+    <div class="col-lg-4 col-sm-4 col-xs-6">
       <h6 class="tb_title">Billing address: </h6>
       <br><br>
       <p>{{user.customer_account.billing_address}}</p>
       <br>
+      </div>
+    <div class="col-lg-4 col-sm-4 col-xs-6">
       <h6 class="tb_title">Delivery address: </h6>
       <br><br>
       <p>{{user.customer_account.delivery_address}}</p>
@@ -32,12 +34,13 @@
 
   </div>
   <div class="row text-cen cen">
-    <div class="col-lg-6 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
       <div class="edit-details">
       <a href="{% url 'accounts:edit' pk=user.customer_account.pk %}"
         title="Edit" class="btn btn-outline-primary">Edit Details</a>
       </div>
         <br><br>
+        <br>
       <h4 class="tb_title">Previous orders</h4>
       <br><br><br>
       {% if customer_orders %}
@@ -65,10 +68,15 @@
 
     <h3>Page error</h3>
     {% endif %}
-    <br><br>
-    </div>
   </div>
-  <br>
+  </div>
 </div>
+<div class="container cen text-cen">
+    <br>
+      <a href="{% url 'home' %}"
+       class="btn btn-outline-primary">Home</a>
+     <br><br>
+  </div>
+
 
 {% endblock %}
