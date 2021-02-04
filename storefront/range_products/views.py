@@ -27,7 +27,6 @@ def create_range_bouquet(request,range_name,slug):
             y.basket = x
             y.item_name = a.item_name
             y.price = a.price
-            y.image = a.image
             y.save()
             print("Rbouquet updated")
             return redirect('basket:basket')
@@ -51,7 +50,13 @@ class RangeBouquetDetail(DetailView):
     model = RangeBouquet
     template_name = 'range_products/rbouquet_detail.html'
 
-
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data()
+        bs = RangeBouquet.objects.filter(item_name=self.object.item_name)
+        y = [x for x in bs if x.image]
+        z = y[0]
+        context['bouq_image'] = z.image
+        return context
 
 
 ### Doesn't have a basket:
