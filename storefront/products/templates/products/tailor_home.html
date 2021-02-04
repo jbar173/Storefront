@@ -3,26 +3,27 @@
 
 {% block content_block %}
 
-<div class="container width-full">
-  <div class="row">
-    <img src="{% static "images/titles/designown2.jpg" %}" style="width:100%;" alt="Error loading photo">
-  </div>
-</div>
 
-<div class="container">
+<img src="{% static "images/titles/DesignBouq2JPG.jpg" %}" style="max-width:100%;height:auto;" alt="Error loading photo">
+
+<br>
+<div class="container" style="padding-left:0px;padding-right:0px;">
   <div class="row">
     <div class="col-lg-6 col-sm-12 col-xs-12">
-        <a href="{% url 'themed_products:create_themed' %}"><img class="img-fluid myborder-thick" src="{% static "images/titles/designtag1.png" %}" alt="Error loading photo"></a>
-      </div>
-
+        <a href="{% url 'themed_products:create_themed' %}"><img class="img-fluid myborder" src="{% static "images/titles/123456.jpg" %}" alt="Error loading photo"></a>
+        <br>
+    </div>
       <div class="col-lg-6 col-sm-12 col-xs-12">
         <form class="create-bouquet" method="post">
           {{bouquet_form.as_p}}
           {% csrf_token %}
-          <input type="image" class="img-fluid myborder" src="{% static "images/titles/designtagnew4.png" %}" alt="Tailor flower by flower">
+          <input type="image" class="img-fluid myborder" src="{% static "images/titles/flowers3.jpg" %}" alt="Tailor flower by flower">
         </form>
         </div>
     </div>
 </div>
+<br>
 
 {% endblock %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

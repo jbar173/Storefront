@@ -152,13 +152,7 @@
 .myborder{
   border: 1px solid lightgrey;
   border-radius: 10px;
-  padding: 0px 0px 0px 0px;
-}
-
-.myborder-thick{
-  border: 1px solid lightgrey;
-  border-radius: 10px;
-  padding: 15px 0px 20px 0px;
+  padding: 5px 5px 5px 5px;
 }
 
 .mybtn:hover{
@@ -197,8 +191,4 @@
   height: 75px;
   width: 200px;
   border: 3px dashed lightgrey;
-}
-
-.header-image{
-  background-attachment: scroll;
 }
