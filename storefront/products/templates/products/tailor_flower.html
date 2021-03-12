@@ -4,9 +4,11 @@
 
 {% if bouquet.flower.count < 1 %}
 
+<br><br>
+<br>
 <div class="container-fluid">
   <div class="row text-cen cen">
-    <div class="col-lg-6 col-sm-12 col-xs-12 pale-image text-cen">
+    <div class="col-lg-6 mx-auto col-md-12 col-sm-12 col-xs-12 pale-image text-cen">
       <br><br><br>
       <h5>No flowers in your bouquet yet!</h5>
       <br><br><br>
@@ -20,7 +22,7 @@
 
 <div class="container-fluid">
   <div class="row text-cen cen">
-    <div class="col-lg-6 col-sm-12 col-xs-12 pale-image text-cen">
+    <div class="col-lg-6 mx-auto col-md-12 col-sm-12 col-xs-12 pale-image text-cen">
       <br><br><br>
       <h3 class="tb_title">In your bouquet:</h3>
       <br><br><br>
@@ -40,7 +42,7 @@
 
 <div class="container-fluid">
   <div class="row text-cen cen">
-    <div class="col-lg-6 col-sm-12 col-xs-12 text-cen">
+    <div class="col-lg-6 mx-auto col-md-12 col-sm-12 col-xs-12 text-cen">
       <div class="row text-cen cen">
           <div class="col text-cen">
           <h6 class="text-cen cen"><a class="btn btn-outline-danger" href="{% url 'products:delete_bouquet' pk=bouquet.pk %}">Discard all</a></h6>

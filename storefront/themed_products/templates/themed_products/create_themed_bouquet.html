@@ -3,11 +3,12 @@
 
 {% block content_block %}
 
-<div class="container-fluid">
+<div class="container-fluid" style="float:none; margin:auto;">
+  <br><br><br>
   <div class="row text-cen cen">
-    <div class="col-lg-6 col-sm-12 col-xs-12 formimage text-cen">
+    <div class="col-lg-6 mx-auto col-lg-offset-3 col-md-12 col-sm-12 col-xs-12 formimage text-cen">
         <br><br><br>
-        <h4 class="tb_title b-gr txt-white" >Choose your bouquet theme and size</h4>
+        <h4 class="tb_title b-gr txt-white">Choose your bouquet theme and size</h4>
         <br><br><br>
         <form class="txt-gr" method="post">
           {% csrf_token %}

@@ -4,9 +4,10 @@
 {% block content_block %}
 
 <br><br>
+<br>
 <div class="container">
   <div class="row text-cen cen">
-    <div class="col-lg-6 col-sm-12 col-xs-6 pale-image thumb-border-full">
+    <div class="col-lg-6 mx-auto col-md-12 col-sm-12 col-xs-6 pale-image thumb-border-full">
         <br><br>
       {% if user.is_authenticated %}
         <form method="post">
@@ -25,7 +26,7 @@
       <h6><a class="btn btn-outline-danger" href="{% url 'products:detail_bouquet' pk=bouquet_pk %}">Back to bouquet</a></h6>
       <br><br>
       {% endif %}
-      
+
       </div>
     </div>
   </div>

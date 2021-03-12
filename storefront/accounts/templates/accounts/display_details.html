@@ -7,76 +7,76 @@
 
 {% block notification %}{% endblock %}
 
-<div class="container pale-image thumb-border-full acc">
-  <div class="row text-cen cen">
-    <h3 class="tb_title">{{account.user.username}}'s Account Details</h3>
-    <br><br>
-    <br><br>
-    <br><br><br>
-    <div class="col-lg-4 col-sm-4 col-xs-6">
-      <h6 class="tb_title">Name:</h6>
-      <br><br>
-      <p>{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
-      <br>
-    </div>
-    <div class="col-lg-4 col-sm-4 col-xs-6">
-      <h6 class="tb_title">Billing address: </h6>
-      <br><br>
-      <p>{{user.customer_account.billing_address}}</p>
-      <br>
-      </div>
-    <div class="col-lg-4 col-sm-4 col-xs-6">
-      <h6 class="tb_title">Delivery address: </h6>
-      <br><br>
-      <p>{{user.customer_account.delivery_address}}</p>
-      <br>
-    </div>
-
-  </div>
-  <div class="row text-cen cen">
-    <div class="col-lg-12 col-sm-12 col-xs-12">
-      <div class="edit-details">
-      <a href="{% url 'accounts:edit' pk=user.customer_account.pk %}"
-        title="Edit" class="btn btn-outline-primary">Edit Details</a>
-      </div>
+<div class="container-fluid">
+    <div class="container pale-image thumb-border-full acc">
+      <div class="row text-cen cen">
+        <h3 class="tb_title">{{account.user.username}}'s Account Details</h3>
         <br><br>
-        <br>
-      <h4 class="tb_title">Previous orders</h4>
-      <br><br><br>
-      {% if customer_orders %}
-      <div class="container text-cen cen">
-        <table class="text-cen cen orders" id="order-table">
-          {% for x in customer_orders %}
-            <tr class="text-cen cen">
-              <td class="text-cen cen new-border-l">
-                <h6>{{x}}</h6>
-              </td>
-              <td class="text-cen cen">
-                <a href="{% url 'orders:detail' pk=x.pk %}"
-                 class="btn btn-sm btn-outline-success">Details</a>
-              </td>
-            </tr>
-          {% endfor %}
-        </table>
-        {% else %}
-        <h6>No previous orders</h6>
-        <br>
+        <br><br>
+        <br><br><br>
+        <div class="col-lg-4 col-sm-4 col-xs-6">
+          <h6 class="tb_title">Name:</h6>
+          <br><br>
+          <p style="font-size:1.1em">{{user.customer_account.first_name}} {{user.customer_account.surname}}</p>
+          <br>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-6">
+          <h6 class="tb_title">Billing address: </h6>
+          <br><br>
+          <p style="font-size:1.1em">{{user.customer_account.billing_address}}</p>
+          <br>
+          </div>
+        <div class="col-lg-4 col-sm-4 col-xs-6">
+          <h6 class="tb_title">Delivery address: </h6>
+          <br><br>
+          <p style="font-size:1.1em">{{user.customer_account.delivery_address}}</p>
+          <br>
+        </div>
+
       </div>
-      {% endif %}
+      <div class="row text-cen cen">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+          <div class="edit-details">
+          <a href="{% url 'accounts:edit' pk=user.customer_account.pk %}"
+            title="Edit" class="btn btn-outline-primary">Edit Details</a>
+          </div>
+            <br><br>
+            <br>
+          <h4 class="tb_title">Previous orders</h4>
+          <br><br><br>
+          {% if customer_orders %}
+          <div class="container text-cen cen">
+            <table class="text-cen cen orders" id="order-table">
+              {% for x in customer_orders %}
+                <tr class="text-cen cen">
+                  <td class="text-cen cen new-border-l">
+                    <h6>{{x}}</h6>
+                  </td>
+                  <td class="text-cen cen">
+                    <a href="{% url 'orders:detail' pk=x.pk %}"
+                     class="btn btn-sm btn-outline-success">Details</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+            {% else %}
+            <h6>No previous orders</h6>
+            <br>
+          </div>
+          {% endif %}
 
-    {% else %}
+        {% else %}
 
-    <h3>Page error</h3>
-    {% endif %}
-  </div>
-  </div>
+        <h3>Page error</h3>
+        {% endif %}
+      </div>
+      </div>
+    </div>
+    <div class="container cen text-cen">
+        <br>
+          <a href="{% url 'home' %}"
+           class="btn btn-outline-primary">Home</a>
+         <br><br>
+      </div>
 </div>
-<div class="container cen text-cen">
-    <br>
-      <a href="{% url 'home' %}"
-       class="btn btn-outline-primary">Home</a>
-     <br><br>
-  </div>
-
-
 {% endblock %}

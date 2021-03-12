@@ -19,7 +19,7 @@ class SignUp(CreateView):
 
 class CreateAccount(LoginRequiredMixin,CreateView):
     model = models.Account
-    fields = ['first_name','surname','billing_address','delivery_address']
+    form_class = forms.CreateAccountForm
     template_name = 'accounts/create_account.html'
 
     def form_valid(self,form):
@@ -41,5 +41,5 @@ class DisplayDetails(DetailView,SelectRelatedMixin):
 
 class EditAccount(LoginRequiredMixin,UpdateView):
     model = models.Account
-    fields = ['first_name','surname','billing_address','delivery_address']
+    form_class = forms.EditAccountForm
     template_name = 'accounts/edit_details.html'
