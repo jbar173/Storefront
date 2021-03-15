@@ -12,13 +12,14 @@
         <img class="img-thumbnail img-fluid" src="{{x.r_bouquet.image.url}}" alt="Error loading photo">
       </div>
       <div class="col-lg-6 col-sm-6 col-xs-6">
+        <br>
         <h5 class='cen'>{{x.r_bouquet|title}}</h5>
         <p class='cen'>£{{x.r_bouquet.price|title}}</p>
 
           <a class="btn btn-outline-success btn-sm cen text-cen"
           href="{% url 'range_products:create_one' slug=x.r_bouquet.slug range_name=x.name %}">
           Add to basket</a>
-          <br><br>
+          <br><br><br>
 
       </div>
     </div>

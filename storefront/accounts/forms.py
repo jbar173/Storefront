@@ -34,6 +34,6 @@ class EditAccountForm(forms.ModelForm):
         model = Account
         fields = ['first_name','surname','billing_address','delivery_address']
         widgets = {
-            'billing_address': forms.Textarea(attrs={'rows':5}),
-            'delivery_address': forms.Textarea(attrs={'rows':5}),
+            'billing_address': forms.Textarea(attrs={'rows':5,}),
+            'delivery_address': forms.Textarea(attrs={'rows':5,}),
         }
