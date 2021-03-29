@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = Path(BASE_DIR,'templates').joinpath()
 MEDIA_DIR = Path(BASE_DIR,'media').joinpath()
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # Quick-start development settings - unsuitable for production
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'themed_products',
     'orders',
     'range_products',
+    'enquiry',
 ]
 
 MIDDLEWARE = [

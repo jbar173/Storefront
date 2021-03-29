@@ -1,0 +1,41 @@
+{% extends 'site_base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+  <head>
+    <style>
+      input:invalid{
+        border:2px solid red;
+      }
+      .phone-field{
+        border:2px solid red;
+      }
+      ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        color: red;
+      }
+    </style>
+  </head>
+
+{% block content_block %}
+    <br><br>
+
+    <div class="container-fluid" style="text-align:center">
+      <div class="row text-cen cen">
+        <div class="col-lg-6 mx-auto col-md-12 col-sm-12 col-xs-6 pale-image thumb-border-full">
+          <br><br>
+            <h3 style="text-align:center">Enquiry Form</h3>
+            <br>
+            <form class="my-form" method="post">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              <br>
+              <input class="btn-btn-success" type="submit" name="enquiry" value="Send">
+              <br><br>
+            </form>
+        </div>
+      </div>
+    </div>
+<br><br>
+{% endblock %}
